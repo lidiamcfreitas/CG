@@ -14,3 +14,10 @@
 -       estacoes do ano
  
  */
+
+/*
+comentarios do prof
+ ordenados por prioridade:
+-laranja tem que ter um tempo rand para voltar a aparecer
+-usar timer para aumentar a velocidade das laranjas
+-a reshape na camera 2 não é importante. podemos alterar se quisermos.

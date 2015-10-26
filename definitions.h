@@ -22,7 +22,7 @@
 
 // GAMEMANAGER
 #define NUM_CHEERIOS            30
-#define NUM_ORANGES             10
+#define NUM_ORANGES             3
 #define NUM_BUTTERS             3
 #define ROAD_OUT_RADIUS         120
 #define ROAD_WIDTH              40
