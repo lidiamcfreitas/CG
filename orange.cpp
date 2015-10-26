@@ -107,6 +107,7 @@ GLvoid Orange::update(GLdouble delta_t){
     }
     if ((fabs(getPosition().getX()) >(TABLE_SIZE/2 + ORANGE_SIZE*0.5) || fabs(getPosition().getY()) >(TABLE_SIZE/2 + ORANGE_SIZE*0.5)) &&  getPosition().getZ()<-100) {
         setPosition((rand()%(TABLE_SIZE) - TABLE_SIZE/2), (rand()%(TABLE_SIZE) - TABLE_SIZE/2), ORANGE_SIZE+300);
+        //call timer func and delete previous line which should be done when timer times out
     }
     
     _rotate += _orange_vel*(delta_t/1000)*360/(2.*M_PI*ORANGE_SIZE);
