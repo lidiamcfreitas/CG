@@ -88,13 +88,18 @@ GLvoid Orange::draw(){
      printf("here bitch \n");
 }
 
+GLvoid Orange::levelUp(){
+    printf("Orange %d lvld up\n", _id);
+    _orange_vel = _orange_vel + ORANGE_VEL_STEP;
+}
+
 GLvoid Orange::update(GLdouble delta_t){
     
 
     GLdouble currentTime = glutGet(GLUT_ELAPSED_TIME);
-    if ((GLint)currentTime/10000 != _last_time_division) {
+    /*if ((GLint)currentTime/10000 != _last_time_division) {
         _orange_vel = _orange_vel + rand() % ORANGE_VEL_STEP;
-    }
+    }*/
     
     //_orange_vel = _orange_vel + ORANGE_ACCEL * delta_t/1000;// defines forward acceleration
         

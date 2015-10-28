@@ -257,6 +257,14 @@ GLvoid GameManager::init(){
     }
     //Game table
     _table = Table();
+    
+}
+
+GLvoid GameManager::levelUp(){
+    //oranges
+    for(int i = 0; i < NUM_ORANGES; i++){
+        _oranges[i].levelUp();
+    }
 }
 
 GLvoid GameManager::wakeupOrange(int _id){

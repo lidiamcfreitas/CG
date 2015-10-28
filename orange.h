@@ -17,5 +17,5 @@ public:
 	virtual GLvoid draw();
     GLvoid update(GLdouble delta_t);
     GLvoid wakeupOrange();
-
+    GLvoid levelUp();
 };
