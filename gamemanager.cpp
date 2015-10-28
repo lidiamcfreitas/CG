@@ -140,7 +140,7 @@ GLvoid GameManager::update(GLdouble delta_t){
     //collisions
     
     Vector3 direction = Vector3();
-    for( GLint i = 0; i < NUM_ORANGES - 1; i++){ // car - oranges
+    for( GLint i = 0; i < NUM_ORANGES; i++){ // car - oranges
         if(detectCollision(_car, _oranges[i], direction)){
             printf("collision detected with oranges\n");
             _car.reset();
@@ -247,7 +247,7 @@ GLvoid GameManager::init(){
     }
     //oranges
     for(int i = 0; i < NUM_ORANGES; i++){
-        Orange orange = Orange();
+        Orange orange = Orange(i);
         _oranges.push_back(orange);
     }
     //butters
@@ -257,4 +257,16 @@ GLvoid GameManager::init(){
     }
     //Game table
     _table = Table();
+    
+}
+
+GLvoid GameManager::levelUp(){
+    //oranges
+    for(int i = 0; i < NUM_ORANGES; i++){
+        _oranges[i].levelUp();
+    }
+}
+
+GLvoid GameManager::wakeupOrange(int _id){
+    _oranges[_id].wakeupOrange();
 }

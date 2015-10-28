@@ -78,6 +78,14 @@ GLvoid timer(int value)
 
 }
 
+GLvoid main_wakeupOrange(int value){
+    gamemanager.wakeupOrange(value);
+}
+
+GLvoid main_levelUp(int value){
+    gamemanager.levelUp();
+    glutTimerFunc(10000, main_levelUp, 0);
+}
 
 int main(int argc, char **argv)
 {
@@ -99,6 +107,7 @@ int main(int argc, char **argv)
 	glutReshapeFunc(reshape);
     glClearColor( 1., 1., 1., 0.);
 	glutTimerFunc(10, timer, 0);
+    glutTimerFunc(10000, main_levelUp, 0);
     
 	glutMainLoop();
 	return 0;

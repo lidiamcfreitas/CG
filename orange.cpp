@@ -1,6 +1,8 @@
 #include "orange.h"
 
-Orange::Orange():DynamicObject(){
+Orange::Orange(GLint i):DynamicObject(){
+    _id = i;
+    _alive = true;
     _hitboxRadius = 5;//2.5
     _orange_angle = rand() % 360;
     _orange_vel = ORANGE_INI_VEL + rand()%ORANGE_INI_VEL;
@@ -80,12 +82,24 @@ GLvoid Orange::draw(){
     }
 }
 
+ GLvoid Orange::wakeupOrange(){
+    _alive = true;
+     setPosition((rand()%(TABLE_SIZE) - TABLE_SIZE/2), (rand()%(TABLE_SIZE) - TABLE_SIZE/2), ORANGE_SIZE+300);
+     printf("here bitch \n");
+}
+
+GLvoid Orange::levelUp(){
+    printf("Orange %d lvld up\n", _id);
+    _orange_vel = _orange_vel + ORANGE_VEL_STEP;
+}
+
 GLvoid Orange::update(GLdouble delta_t){
     
+
     GLdouble currentTime = glutGet(GLUT_ELAPSED_TIME);
-    if ((GLint)currentTime/10000 != _last_time_division) {
+    /*if ((GLint)currentTime/10000 != _last_time_division) {
         _orange_vel = _orange_vel + rand() % ORANGE_VEL_STEP;
-    }
+    }*/
     
     //_orange_vel = _orange_vel + ORANGE_ACCEL * delta_t/1000;// defines forward acceleration
         
@@ -105,11 +119,16 @@ GLvoid Orange::update(GLdouble delta_t){
     if (fabs(getPosition().getX()) >(TABLE_SIZE/2+ORANGE_SIZE*0.5) || fabs(getPosition().getY()) >(TABLE_SIZE/2+ORANGE_SIZE*0.5)) {
         setPosition(getPosition().getX() + delta_x, getPosition().getY() + delta_y, getPosition().getZ()-1);
     }
-    if ((fabs(getPosition().getX()) >(TABLE_SIZE/2 + ORANGE_SIZE*0.5) || fabs(getPosition().getY()) >(TABLE_SIZE/2 + ORANGE_SIZE*0.5)) &&  getPosition().getZ()<-100) {
-        setPosition((rand()%(TABLE_SIZE) - TABLE_SIZE/2), (rand()%(TABLE_SIZE) - TABLE_SIZE/2), ORANGE_SIZE+300);
+    if (_alive && (fabs(getPosition().getX()) >(TABLE_SIZE/2 + ORANGE_SIZE*0.5) || fabs(getPosition().getY()) >(TABLE_SIZE/2 + ORANGE_SIZE*0.5)) &&  getPosition().getZ()<-100) {
+        //setPosition((rand()%(TABLE_SIZE) - TABLE_SIZE/2), (rand()%(TABLE_SIZE) - TABLE_SIZE/2), ORANGE_SIZE+300);
         //call timer func and delete previous line which should be done when timer times out
+        _alive = false;
+        glutTimerFunc(3000, main_wakeupOrange, _id); //5000+rand()%5000
+        printf("morreu\n");        
     }
+    
     
     _rotate += _orange_vel*(delta_t/1000)*360/(2.*M_PI*ORANGE_SIZE);
     _last_time_division = (GLint)currentTime/10000;
 }
+

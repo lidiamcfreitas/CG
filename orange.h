@@ -4,14 +4,18 @@
 
 
 class Orange : public DynamicObject{
-public:
-    Orange();
-	~Orange();
-	virtual GLvoid draw();
-    GLvoid update(GLdouble delta_t);
 private:
     GLfloat     _orange_angle;
     GLfloat     _orange_vel;
     GLfloat       _rotate;
     GLint       _last_time_division;
+    GLboolean _alive;
+    GLint _id;
+public:
+    Orange(GLint i);
+	~Orange();
+	virtual GLvoid draw();
+    GLvoid update(GLdouble delta_t);
+    GLvoid wakeupOrange();
+    GLvoid levelUp();
 };
