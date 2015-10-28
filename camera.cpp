@@ -9,7 +9,7 @@ Camera::Camera(){}
 
 Camera::~Camera(){}
 
-GLvoid Camera::update(Vector3 vec, Vector3 speed, GLdouble vel){
+GLvoid Camera::update(Vector3 vec, GLfloat angle){
 }
 
 GLvoid Camera::computeProjectionMatrix(GLfloat aspect){

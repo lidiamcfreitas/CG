@@ -12,7 +12,7 @@ public:
 	Camera(GLdouble near, GLdouble far);
 	Camera();
 	~Camera();
-	virtual GLvoid update(Vector3 vec, Vector3 speed, GLdouble vel);
+	virtual GLvoid update(Vector3 vec, GLfloat angle);
 	virtual GLvoid computeProjectionMatrix(GLfloat aspect);
 	virtual GLvoid computeVisualizationMatrix();
 };

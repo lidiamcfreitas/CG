@@ -8,8 +8,6 @@
 #endif
 
 #include "gamemanager.h"
-
-
 #include <stdarg.h>
 #include <cmath>
 #define GL_GLEXT_PROTOTYPES

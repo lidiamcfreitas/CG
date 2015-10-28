@@ -9,15 +9,12 @@ Movperspectivecamera::Movperspectivecamera(GLdouble near, GLdouble far): Perspec
 Movperspectivecamera::~Movperspectivecamera(){
 }
 
-GLvoid Movperspectivecamera::update(Vector3 vec, Vector3 speed, GLdouble vel ){
-    GLfloat x = speed.getX()*75/speed.norm();
-    GLfloat y = speed.getY()*75/speed.norm();
+GLvoid Movperspectivecamera::update(Vector3 vec, GLfloat angle ){
+	GLfloat x = cos(angle*M_PI / 180) * 75;
+	GLfloat y = sin(angle*M_PI / 180) * 75;
     
-    if (vel <0){
-        _position.set(vec.getX() + x, vec.getY() + y, 100);
-    } else {
-        _position.set(vec.getX() - x, vec.getY()- y, 100);
-    }
+
+    _position.set(vec.getX() - x, vec.getY()- y, 100);
     
 	_looking.set(vec.getX(), vec.getY(), 20);
 
