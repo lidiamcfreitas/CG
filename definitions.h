@@ -5,6 +5,7 @@
 #ifndef definitions_h
 #define definitions_h
 
+#define _USE_MATH_DEFINES
 #include <stdlib.h>
 #include <iostream>
 #include <cmath>
@@ -17,7 +18,7 @@
     #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 #else
     #include <GL/glut.h>
-    #define _USE_MATH_DEFINES
+    
 #endif
 
 // GAMEMANAGER
