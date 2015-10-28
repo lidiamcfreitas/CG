@@ -12,7 +12,7 @@ GLvoid Table::draw(){
     glPopMatrix();
     
     //table
-    glColor3f(0.7, 0.7, 0.7); // glColor3f(0.7, 0.7, 0.7);
+    glColor3f(0.6, 0.6, 0.6); // glColor3f(0.7, 0.7, 0.7);
     glPushMatrix();
     glTranslatef( 0.0f, 0.0f, -20.);
     
@@ -22,7 +22,7 @@ GLvoid Table::draw(){
     
     //inner table circle
     glPushMatrix();
-    glColor3f(0.7, 0.7, 0.7); // glColor3f(0.7, 0.7, 0.7);
+    glColor3f(0.6, 0.6, 0.6); // glColor3f(0.7, 0.7, 0.7);
     glTranslatef(0.0, 0.0, 0.11);
     glRotatef(90, 0, 1, 0);
     glutSolidSphere(ROAD_OUT_RADIUS - ROAD_WIDTH, 2, 16);
@@ -30,7 +30,7 @@ GLvoid Table::draw(){
     
     //outter table ring
     glPushMatrix();
-    glColor3f(0.528, 0.528, 0.528); // glColor3f(0.7, 0.7, 0.7);
+    glColor3f(0.428, 0.428, 0.428); // glColor3f(0.7, 0.7, 0.7);
     glTranslatef(0.0, 0.0, 0.1);
     glRotatef(90, 0, 1, 0);
     glutSolidSphere(ROAD_OUT_RADIUS, 2, 16);

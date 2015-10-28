@@ -54,4 +54,5 @@ public:
 	GLvoid changedCamera();
     GLboolean detectCollision(DynamicObject &obj1index, DynamicObject &obj2index, Vector3 &direction_v);
     GLvoid objectReaction(GLint obj1index, GLint obj2index);
+    GLvoid wakeupOrange(int _id);
 };

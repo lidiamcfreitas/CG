@@ -78,6 +78,10 @@ GLvoid timer(int value)
 
 }
 
+GLvoid main_wakeupOrange(int value){
+    gamemanager.wakeupOrange(value);
+}
+
 
 int main(int argc, char **argv)
 {

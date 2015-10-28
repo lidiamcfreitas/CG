@@ -23,7 +23,7 @@
 // GAMEMANAGER
 #define NUM_CHEERIOS            30
 #define NUM_ORANGES             3
-#define NUM_BUTTERS             3
+#define NUM_BUTTERS             5
 #define ROAD_OUT_RADIUS         120
 #define ROAD_WIDTH              40
 #define TABLE_SIZE              250
@@ -59,4 +59,5 @@
 #define CAMERA_PERSP            1
 #define CAMERA_CAR              2
 
+GLvoid main_wakeupOrange(int value);
 #endif /* definitions_h */
