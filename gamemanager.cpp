@@ -135,7 +135,7 @@ GLvoid GameManager::update(GLdouble delta_t){
         _cheerios_out[i].update(delta_t);
 
 	//update current camera
-	_cameras[_currentCamera]->update(_car.getPosition(), _car.getSpeed());
+	_cameras[_currentCamera]->update(_car.getPosition(), _car.getSpeed(), _car.getVel());
     
     //collisions
     
