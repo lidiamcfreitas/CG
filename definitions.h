@@ -12,6 +12,7 @@
 #include <math.h>
 #include <time.h>
 #include <vector>
+#include <memory>
 
 #if defined(__APPLE__) || defined(MACOSX)
     #include <GLUT/glut.h>

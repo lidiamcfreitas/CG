@@ -16,70 +16,72 @@ Orange::~Orange() {
 };
 
 GLvoid Orange::draw(){
-    GLboolean solidOrWire = getSolidOrWire();//Solid or Wire objects flag
-    
-    
-    glPushMatrix();
+	if (_alive){
+		GLboolean solidOrWire = getSolidOrWire();//Solid or Wire objects flag
 
-    glTranslatef( getPosition().getX(), getPosition().getY(), getPosition().getZ());
-    glRotatef(_rotate,(-1)*sin(_orange_angle*M_PI/180),cos(_orange_angle*M_PI/180),0);
-    
-    //------------orange
-    glColor3f(0.992, 0.6039, 0);
-    
-    glPushMatrix();
 
-    if(solidOrWire){ // radius 5
-        glutSolidSphere(ORANGE_SIZE, 16, 16);
-    }
-    else{
-        glutWireSphere(ORANGE_SIZE, 16, 16);
-    }
-    glPopMatrix();
-        
-    
+		glPushMatrix();
 
-    
-    //----------stick
-    glColor3f(65./255, 73.0/255, 47./255);
-    glPushMatrix();
-    
-    glTranslatef( 0, 0, ORANGE_SIZE);
-    glRotatef(15, 0, 1, 0);
-    glScalef(1, 1, 3.5); //3.5 or 7 (pau GRANDE - lidia aproves)
-    if(solidOrWire){
-        glutSolidCube(ORANGE_SIZE/7.);
-    }
-    else{
-        glutWireCube(ORANGE_SIZE/7.);
-    }
-    glPopMatrix();
-    
-    //----------folha
-    glColor3f(96./255, 147./255, 71./255);
-    glPushMatrix();
-    
-    glTranslatef( ORANGE_SIZE*0.35, 0, ORANGE_SIZE*1.);
-    glRotatef(40, 0, 1, 1);
-    glScalef(1.4, 1, 0.1);
-    if(solidOrWire){
-        glutSolidCube(ORANGE_SIZE/3.);
-    }
-    else{
-        glutWireCube(ORANGE_SIZE/3.);
-    }
-    glPopMatrix();
-    glPopMatrix();
-    
-    if (getPosition().getZ()>0) {
-        //----Sombra
-        glColor3f(0.4, 0.4, 0.4);
-        glPushMatrix();
-        glTranslatef( getPosition().getX(), getPosition().getY(), 1);
-        glRotatef(90, 0, 1, 0);
-        glutSolidSphere((1-getPosition().getZ()/360)*ORANGE_SIZE, 2, 16);
-        glPopMatrix();
-    }
+		glTranslatef(getPosition().getX(), getPosition().getY(), getPosition().getZ());
+		glRotatef(_rotate, (-1)*sin(_orange_angle*M_PI / 180), cos(_orange_angle*M_PI / 180), 0);
+
+		//------------orange
+		glColor3f(0.992, 0.6039, 0);
+
+		glPushMatrix();
+
+		if (solidOrWire){ // radius 5
+			glutSolidSphere(ORANGE_SIZE, 16, 16);
+		}
+		else{
+			glutWireSphere(ORANGE_SIZE, 16, 16);
+		}
+		glPopMatrix();
+
+
+
+
+		//----------stick
+		glColor3f(65. / 255, 73.0 / 255, 47. / 255);
+		glPushMatrix();
+
+		glTranslatef(0, 0, ORANGE_SIZE);
+		glRotatef(15, 0, 1, 0);
+		glScalef(1, 1, 3.5); //3.5 or 7 (pau GRANDE - lidia aproves)
+		if (solidOrWire){
+			glutSolidCube(ORANGE_SIZE / 7.);
+		}
+		else{
+			glutWireCube(ORANGE_SIZE / 7.);
+		}
+		glPopMatrix();
+
+		//----------folha
+		glColor3f(96. / 255, 147. / 255, 71. / 255);
+		glPushMatrix();
+
+		glTranslatef(ORANGE_SIZE*0.35, 0, ORANGE_SIZE*1.);
+		glRotatef(40, 0, 1, 1);
+		glScalef(1.4, 1, 0.1);
+		if (solidOrWire){
+			glutSolidCube(ORANGE_SIZE / 3.);
+		}
+		else{
+			glutWireCube(ORANGE_SIZE / 3.);
+		}
+		glPopMatrix();
+		glPopMatrix();
+
+		if (getPosition().getZ() > 0) {
+			//----Sombra
+			glColor3f(0.4, 0.4, 0.4);
+			glPushMatrix();
+			glTranslatef(getPosition().getX(), getPosition().getY(), 1);
+			glRotatef(90, 0, 1, 0);
+			glutSolidSphere((1 - getPosition().getZ() / 360)*ORANGE_SIZE, 2, 16);
+			glPopMatrix();
+		}
+	}
 }
 
  GLvoid Orange::wakeupOrange(){

@@ -12,7 +12,7 @@ protected:
 public:
 	Perspectivecamera(GLdouble near, GLdouble far);
 	~Perspectivecamera();
-	GLvoid computeProjectionMatrix(GLfloat aspect);
+	GLvoid computeProjectionMatrix();
 	GLvoid computeVisualizationMatrix();
 };
 

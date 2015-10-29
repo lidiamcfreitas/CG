@@ -13,7 +13,7 @@ public:
 	Camera();
 	~Camera();
 	virtual GLvoid update(Vector3 vec, GLfloat angle);
-	virtual GLvoid computeProjectionMatrix(GLfloat aspect);
+	virtual GLvoid computeProjectionMatrix();
 	virtual GLvoid computeVisualizationMatrix();
 };
 

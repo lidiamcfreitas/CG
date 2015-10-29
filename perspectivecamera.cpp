@@ -12,7 +12,8 @@ Perspectivecamera::~Perspectivecamera(){
 }
 
 
-GLvoid Perspectivecamera::computeProjectionMatrix(GLfloat aspect){
+GLvoid Perspectivecamera::computeProjectionMatrix(){
+	GLdouble aspect = float(glutGet(GLUT_WINDOW_WIDTH)) / float(glutGet(GLUT_WINDOW_HEIGHT));
 	gluPerspective(FOV_Y, aspect, _near, _far);
 }
 

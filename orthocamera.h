@@ -6,6 +6,6 @@ class Orthocamera: public Camera {
 public:
 	Orthocamera();
 	~Orthocamera();
-	GLvoid computeProjectionMatrix(GLfloat aspect);
+	GLvoid computeProjectionMatrix();
 };
 
