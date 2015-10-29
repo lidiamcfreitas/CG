@@ -98,25 +98,17 @@ GLvoid GameManager::display(GLboolean solidOrWire) {
 }
 
 GLvoid GameManager::reshape(GLsizei w, GLsizei h){
-    
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	_w = w;
-	_h = h;
 	glViewport(0, 0, w, h);
-	GLfloat aspect = float(w) / float(h);
-	_cameras[_currentCamera]->computeProjectionMatrix(aspect);
+	_cameras[_currentCamera]->computeProjectionMatrix();
 }
 
 GLvoid GameManager::changedCamera(){
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glViewport(0, 0, _w, _h);                   /* TODO get w and h */
-	GLfloat aspect = float(_w) / float(_h);
-	_cameras[_currentCamera]->computeProjectionMatrix(aspect);
+	_cameras[_currentCamera]->computeProjectionMatrix();
 }
-
-
 
 GLvoid GameManager::update(GLdouble delta_t){
     
@@ -135,7 +127,7 @@ GLvoid GameManager::update(GLdouble delta_t){
         _cheerios_out[i].update(delta_t);
 
 	//update current camera
-	_cameras[_currentCamera]->update(_car.getPosition(), _car.getSpeed());
+	_cameras[_currentCamera]->update(_car.getPosition(), _car.getAngle());
     
     //collisions
     
@@ -215,21 +207,14 @@ GLboolean GameManager::detectCollision(DynamicObject &obj1, DynamicObject &obj2,
 GLvoid GameManager::init(){
 
 	//Cameras set up
-	Camera* camera = new Orthocamera();
-	_cameras.push_back(camera);
-	camera = new Perspectivecamera(1, PRESPCAM_POS + TABLE_SIZE);
-	_cameras.push_back(camera);
-	camera = new Movperspectivecamera(1, 300);
-	_cameras.push_back(camera);
+	_cameras.push_back(std::make_shared<Orthocamera>());
+	_cameras.push_back(std::make_shared<Perspectivecamera> (1, PRESPCAM_POS + TABLE_SIZE));
+	_cameras.push_back(std::make_shared<Movperspectivecamera>(1, 300));
 	_currentCamera = CAMERA_PERSP;
     GLdouble angleIncrement = ((2 * M_PI) / (2 * NUM_CHEERIOS));
     
     /*
-    _cameras.push_back(Orthocamera());
-    _cameras.push_back(Perspectivecamera(1, PRESPCAM_POS + TABLE_SIZE));
-    _cameras.push_back(Movperspectivecamera(1, 300));
-    _currentCamera = CAMERA_PERSP;
-    GLdouble angleIncrement = ((2 * M_PI) / (2 * NUM_CHEERIOS)); */
+    GLdouble angleIncrement = ((2 * M_PI) / (2 * NUM_CHEERIOS));*/
     srand((unsigned int)time(NULL));
     
     //car

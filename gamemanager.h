@@ -26,6 +26,7 @@ private:
     std::vector<Orange> _oranges;
     std::vector<Butter> _butters;
     
+	std::vector<std::shared_ptr<Camera>> _cameras;
 	int _currentCamera;
 	GLsizei _w, _h;
     /* TODO missing light_sources */
@@ -34,7 +35,6 @@ private:
     GLdouble rotate_y;
     GLdouble rotate_x;
 public:
-    std::vector<Camera*> _cameras;
     GameManager();
     ~GameManager();
     GLvoid display(GLboolean solidOWire);
