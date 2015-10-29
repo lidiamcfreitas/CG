@@ -9,6 +9,6 @@ public:
 	Movperspectivecamera(GLdouble near, GLdouble far);
 	~Movperspectivecamera();
 	GLvoid update(Vector3 vec, GLfloat angle);
-
+	GLvoid computeVisualizationMatrix();
 };
 

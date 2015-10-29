@@ -19,3 +19,19 @@ GLvoid Movperspectivecamera::update(Vector3 vec, GLfloat angle ){
 	_looking.set(vec.getX(), vec.getY(), 20);
 
 }
+
+GLvoid Movperspectivecamera::computeVisualizationMatrix(){
+	GLdouble aspect = float(glutGet(GLUT_WINDOW_WIDTH)) / float(glutGet(GLUT_WINDOW_HEIGHT));
+
+	if (aspect >= 0.5){
+		gluLookAt(_position.getX(), _position.getY(), _position.getZ(),
+			_looking.getX(), _looking.getY(), _looking.getZ(),
+			_up.getX(), _up.getY(), _up.getZ());
+	}
+	else{
+		gluLookAt(_position.getX(), _position.getY(), _position.getZ()/(aspect*2),
+			_looking.getX(), _looking.getY(), _looking.getZ(),
+			_up.getX(), _up.getY(), _up.getZ());
+	}
+}
+
