@@ -28,7 +28,6 @@ private:
     
 	std::vector<std::shared_ptr<Camera>> _cameras;
 	int _currentCamera;
-	GLsizei _w, _h;
     /* TODO missing light_sources */
     
     GLboolean _solidOrWire;

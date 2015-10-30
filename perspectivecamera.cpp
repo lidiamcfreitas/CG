@@ -14,11 +14,23 @@ Perspectivecamera::~Perspectivecamera(){
 
 GLvoid Perspectivecamera::computeProjectionMatrix(){
 	GLdouble aspect = float(glutGet(GLUT_WINDOW_WIDTH)) / float(glutGet(GLUT_WINDOW_HEIGHT));
-	gluPerspective(FOV_Y, aspect, _near, _far);
+	if (aspect >= 1)
+		gluPerspective(FOV_Y, aspect, _near, _far);
+	else
+		gluPerspective(FOV_Y, aspect, (_near/aspect), (_far/aspect));
 }
 
 GLvoid Perspectivecamera::computeVisualizationMatrix(){
-	gluLookAt(_position.getX(), _position.getY(), _position.getZ(),
-			  _looking.getX(), _looking.getY(), _looking.getZ(),
-			  _up.getX(), _up.getY(), _up.getZ());
+	GLdouble aspect = float(glutGet(GLUT_WINDOW_WIDTH)) / float(glutGet(GLUT_WINDOW_HEIGHT));
+
+	if (aspect >= 1){
+		gluLookAt(_position.getX(), _position.getY(), _position.getZ(),
+			_looking.getX(), _looking.getY(), _looking.getZ(),
+			_up.getX(), _up.getY(), _up.getZ());
+	}
+	else{
+		gluLookAt(_position.getX()/aspect, _position.getY()/aspect, (_position.getZ()/aspect),
+			_looking.getX(), _looking.getY(), _looking.getZ(),
+			_up.getX(), _up.getY(), _up.getZ());
+	}
 }

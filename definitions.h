@@ -60,6 +60,8 @@
 #define CAMERA_ORTHO            0
 #define CAMERA_PERSP            1
 #define CAMERA_CAR              2
+#define DISTANCE_CAM_TO_CAR     75
+#define HEIGHT_CAM_TO_CAR       100
 
 GLvoid main_wakeupOrange(int value);
 #endif /* definitions_h */
