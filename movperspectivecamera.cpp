@@ -10,11 +10,11 @@ Movperspectivecamera::~Movperspectivecamera(){
 }
 
 GLvoid Movperspectivecamera::update(Vector3 vec, GLfloat angle ){
-	GLfloat x = cos(angle*M_PI / 180) * 75;
-	GLfloat y = sin(angle*M_PI / 180) * 75;
+	GLfloat x = cos(angle*M_PI / 180) * DISTANCE_CAM_TO_CAR;
+	GLfloat y = sin(angle*M_PI / 180) * DISTANCE_CAM_TO_CAR;
     
 
-    _position.set(vec.getX() - x, vec.getY()- y, 100);
+    _position.set(vec.getX() - x, vec.getY()- y, HEIGHT_CAM_TO_CAR);
     
 	_looking.set(vec.getX(), vec.getY(), 20);
 
