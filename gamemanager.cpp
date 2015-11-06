@@ -4,6 +4,7 @@
 GameManager::GameManager() {
     rotate_x = -65;
     rotate_y = 0;
+	_light_calculation = true;
 }
 
 GameManager::~GameManager(){
@@ -55,8 +56,25 @@ GLvoid GameManager::keyPressed(unsigned char key){
         case 'a':
             changeSolidOrWire(); //flip boolean
             break;
+		case 'l':
+			_light_calculation = !_light_calculation;
+			lightCalculationChanged();
+			break;
+		case 'g':
+			//TODO Alterar entre constante e Gouraud
+			break;
+		case 'n':
+			//TODO Ligar ou desligar iluminacao global
+			break;
     }
     printf("%f, %f\n", rotate_x, rotate_y);
+}
+
+GLvoid GameManager::lightCalculationChanged(){
+	if (_light_calculation == true)
+		glEnable(GL_LIGHTING);
+	else
+		glDisable(GL_LIGHTING);
 }
 
 GLvoid GameManager::changeSolidOrWire(){
@@ -205,6 +223,9 @@ GLboolean GameManager::detectCollision(DynamicObject &obj1, DynamicObject &obj2,
 }
 
 GLvoid GameManager::init(){
+
+	//Lighting set up
+
 
 	//Cameras set up
 	_cameras.push_back(std::make_shared<Orthocamera>());
