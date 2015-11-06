@@ -45,7 +45,7 @@
 #define ORANGE_VEL_STEP         5
 
 // BUTTERS
-#define BUTTER_DEACCEL          50
+#define BUTTER_DEACCEL          200
 
 // CHEERIOS
 #define CHEERIO_RADIUS_TUBE     1
