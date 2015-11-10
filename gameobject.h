@@ -18,5 +18,6 @@ public:
     Vector3 getPosition();
     Vector3 setPosition(GLdouble x, GLdouble y, GLdouble z);
     Vector3 setPosition(Vector3 &p);
+    GLvoid material(GLfloat amb[], GLfloat diff[], GLfloat spec[], GLfloat shine);
 };
 

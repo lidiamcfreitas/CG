@@ -2,13 +2,13 @@
 
 #include "gameobject.h"
 #include "dynamicobject.h"
-#include "gameobject.h"
 #include "vector3.h"
 #include "table.h"
 #include "car.h"
 #include "cheerio.h"
 #include "orange.h"
 #include "butter.h"
+#include "pointlight.h"
 #include "camera.h"
 #include "orthocamera.h"
 #include "perspectivecamera.h"
@@ -25,6 +25,7 @@ private:
     std::vector<Cheerio> _cheerios_in;
     std::vector<Orange> _oranges;
     std::vector<Butter> _butters;
+    std::vector<Pointlight> _pointlights;
     
 	std::vector<std::shared_ptr<Camera>> _cameras;
 	int _currentCamera;

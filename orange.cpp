@@ -87,7 +87,6 @@ GLvoid Orange::draw(){
  GLvoid Orange::wakeupOrange(){
     _alive = true;
      setPosition((rand()%(TABLE_SIZE) - TABLE_SIZE/2), (rand()%(TABLE_SIZE) - TABLE_SIZE/2), ORANGE_SIZE+300);
-     printf("here bitch \n");
 }
 
 GLvoid Orange::levelUp(){

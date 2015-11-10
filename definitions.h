@@ -63,5 +63,9 @@
 #define DISTANCE_CAM_TO_CAR     75
 #define HEIGHT_CAM_TO_CAR       100
 
+// POINTLIGHTS
+#define NUM_POINTLIGHTS         6
+#define RADIUS_POINTLIGHTS      125
+
 GLvoid main_wakeupOrange(int value);
 #endif /* definitions_h */

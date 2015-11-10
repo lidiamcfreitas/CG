@@ -92,6 +92,10 @@ GLvoid GameManager::display(GLboolean solidOrWire) {
     
     for (int i = 0; i < _cheerios_out.size(); i++)
         _cheerios_out[i].draw();
+    
+    for (int i = 0; i < _pointlights.size(); i++)
+        _pointlights[i].draw();
+    
     glFlush();
     glutSwapBuffers(); /* TIRAR */
     
@@ -212,6 +216,7 @@ GLvoid GameManager::init(){
 	_cameras.push_back(std::make_shared<Movperspectivecamera>(1, 300));
 	_currentCamera = CAMERA_PERSP;
     GLdouble angleIncrement = ((2 * M_PI) / (2 * NUM_CHEERIOS));
+    GLdouble lightIncrement =((2 * M_PI) / NUM_POINTLIGHTS);
     
     /*
     GLdouble angleIncrement = ((2 * M_PI) / (2 * NUM_CHEERIOS));*/
@@ -242,6 +247,13 @@ GLvoid GameManager::init(){
     }
     //Game table
     _table = Table();
+    
+    //point lights
+    for(float angle = 0; angle < 2 * M_PI - lightIncrement; angle = angle + lightIncrement){
+        printf("x: %d y: %d angle: %d\n", RADIUS_POINTLIGHTS * cosf(angle), RADIUS_POINTLIGHTS * sinf(angle), angle);
+        Pointlight pointlight = Pointlight(RADIUS_POINTLIGHTS * cosf(angle), RADIUS_POINTLIGHTS * sinf(angle), 0);
+        _pointlights.push_back(pointlight);
+    }
     
 }
 
