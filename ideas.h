@@ -15,10 +15,4 @@
  
  */
 
-/*
-comentarios do prof
- ordenados por prioridade:
--larajas deviam ter um atributo _alive para quando "morrem" e aí é que vai ser chamado o timer, que qd acabar vai mudar o valor _alive outra vez para true metendo
- a laranja na pos 300 
--display deve desenhar apenas os objectos alive (n sei se o update tb deverá ter)
--novo timer (semelhante ao do update) no main/gamemanager para iterar laranjas e upar velocidade
+

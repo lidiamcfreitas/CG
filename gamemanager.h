@@ -34,6 +34,7 @@ private:
     GLboolean _solidOrWire;
     GLdouble rotate_y;
     GLdouble rotate_x;
+	GLboolean _light_calculation;
 public:
     GameManager();
     ~GameManager();
@@ -56,5 +57,6 @@ public:
     GLvoid objectReaction(GLint obj1index, GLint obj2index);
     GLvoid wakeupOrange(GLint _id);
     GLvoid levelUp();
+	GLvoid lightCalculationChanged();
 
 };
