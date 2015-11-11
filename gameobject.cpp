@@ -12,6 +12,18 @@ Vector3 GameObject::getPosition(){
     return _position;
 }
 
+GLdouble GameObject::getPositionX(){
+    return _position.getX();
+}
+
+GLdouble GameObject::getPositionY(){
+    return _position.getY();
+}
+
+GLdouble GameObject::getPositionZ(){
+    return _position.getZ();
+}
+
 Vector3 GameObject::setPosition(GLdouble x, GLdouble y, GLdouble z){
     _position.set(x, y, z);
     return _position;
@@ -28,6 +40,6 @@ GLvoid GameObject::material(GLfloat amb[], GLfloat diff[], GLfloat spec[], GLflo
     glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,spec);
     glMaterialf(GL_FRONT_AND_BACK,GL_SHININESS,shine);
     
-    GLfloat emi[] = {0.0, 0.0, 0.0, 1.0};
-    glMaterialfv(GL_FRONT, GL_EMISSION, emi);
+    GLfloat emiss[] = {0.0, 0.0, 0.0, 1.0};
+    glMaterialfv(GL_FRONT, GL_EMISSION, emiss);
 }

@@ -15,6 +15,7 @@
 
 
 GLboolean solidOrwire = true;
+GLboolean paused = false;
 GLdouble lastUpTime = 0.0;
 
 GameManager gamemanager = GameManager();
@@ -43,18 +44,20 @@ GLvoid specialKeysUp( int key, int x, int y ) {
     else if (key == GLUT_KEY_DOWN)
         gamemanager.setKeyDown(false);
 }
-GLvoid CamRot(unsigned char key, int x, int y){
+GLvoid GameControl(unsigned char key, int x, int y){
     
     if (key=='r') {
         gamemanager = GameManager();
         gamemanager.init();
+    } else if (key=='p') {
+        paused = !paused;
     }
 	gamemanager.keyPressed(key);
 }
 
 GLvoid display()
 {
-    gamemanager.display(solidOrwire); /* TIRAR */
+    gamemanager.display(solidOrwire); 
 }
 
 GLvoid reshape(int w, int h)
@@ -67,8 +70,15 @@ GLvoid timer(int value)
     GLdouble currentTime = glutGet(GLUT_ELAPSED_TIME);
     GLdouble diff = currentTime - lastUpTime;
     lastUpTime = currentTime;
-
-    gamemanager.update(diff);
+    
+    if (!paused) {
+        gamemanager.update(diff);
+        if (gamemanager.itsOver()){
+            gamemanager = GameManager();
+            gamemanager.init();
+            paused = !paused;
+        }
+    }
     
 	glutPostRedisplay();
     
@@ -94,16 +104,18 @@ int main(int argc, char **argv)
 	glutCreateWindow("Micro Machines");
     
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_NORMALIZE);
     
     gamemanager.init();
     
 	glutDisplayFunc(display);
     glutSpecialFunc(specialKeys);
     glutSpecialUpFunc(specialKeysUp);
-    glutKeyboardFunc(CamRot);
+    glutKeyboardFunc(GameControl);
     
 	glutReshapeFunc(reshape);
-    glClearColor( 1., 1., 1., 0.);
+    //glClearColor( 1., 1., 1., 0.);
+    glClearColor( 65./255, 105./255, 1., 0.);
 	glutTimerFunc(10, timer, 0);
     glutTimerFunc(10000, main_levelUp, 0);
     

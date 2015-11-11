@@ -3,11 +3,12 @@
 
 class Car : public DynamicObject{
 private:
-    GLboolean _up;
-    GLboolean _down;
-    GLboolean _right;
-    GLboolean _left;
-    Vector3 _previous_position;
+    GLboolean   _up;
+    GLboolean   _down;
+    GLboolean   _right;
+    GLboolean   _left;
+    GLint       _lives;
+    Vector3     _previous_position;
 public:
 	Car();
 	~Car();
@@ -24,4 +25,5 @@ public:
     GLvoid setKeyLeft(GLboolean value);
     GLvoid crash();
     GLvoid reset();
+    GLint getLives();
 };

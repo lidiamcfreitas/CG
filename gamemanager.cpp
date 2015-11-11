@@ -4,7 +4,9 @@
 GameManager::GameManager() {
     rotate_x = -65;
     rotate_y = 0;
-	_light_calculation = true;
+	_light_calculation = false;
+    _daylight = true;
+    _itsOver = false;
 }
 
 GameManager::~GameManager(){
@@ -15,13 +17,34 @@ GLboolean GameManager::getKeyUp(){ return _car.getKeyUp(); }
 GLboolean GameManager::getKeyDown(){ return _car.getKeyDown(); }
 GLboolean GameManager::getKeyRight(){ return _car.getKeyRight(); }
 GLboolean GameManager::getKeyLeft(){ return _car.getKeyLeft(); }
+GLboolean GameManager::itsOver() { return _itsOver; }
 GLvoid GameManager::setKeyUp(GLboolean value){ _car.setKeyUp(value); }
 GLvoid GameManager::setKeyDown(GLboolean value){ _car.setKeyDown(value); }
 GLvoid GameManager::setKeyRight(GLboolean value){ _car.setKeyRight(value); }
 GLvoid GameManager::setKeyLeft(GLboolean value){ _car.setKeyLeft(value); }
 
+
 GLvoid GameManager::keyPressed(unsigned char key){
     switch (key){
+        // EXTRA - ROTACAO
+        case 'e':
+            rotate_x += 5;
+            printf("rotate %f, %f\n", rotate_x, rotate_y);
+            break;
+        case 'd':
+            rotate_x -= 5;
+            printf("rotate %f, %f\n", rotate_x, rotate_y);
+            break;
+        case 's':
+            rotate_y += 5;
+            printf("rotate %f, %f\n", rotate_x, rotate_y);
+            break;
+        case 'f':
+            rotate_y -= 5;
+            printf("rotate %f, %f\n", rotate_x, rotate_y);
+            break;
+        
+        // PROJECTO
         case '1':
             _currentCamera = CAMERA_ORTHO;
             changedCamera();
@@ -41,24 +64,18 @@ GLvoid GameManager::keyPressed(unsigned char key){
             rotate_x = 0;
             rotate_y = 0;
             break;
-        case 'e':
-            rotate_x += 5;
-            break;
-        case 'd':
-            rotate_x -= 5;
-            break;
-        case 's':
-            rotate_y += 5;
-            break;
-        case 'f':
-            rotate_y -= 5;
-            break;
+            
         case 'a':
             changeSolidOrWire(); //flip boolean
             break;
+            
 		case 'l':
 			_light_calculation = !_light_calculation;
 			lightCalculationChanged();
+            
+            for (int i=0; i<NUM_ORANGES;i++){ // To remove artificial shadow when calculation on
+                _oranges[i].switchShadow();
+            }
 			break;
 		case 'g':
 			//TODO Alterar entre constante e Gouraud
@@ -66,8 +83,22 @@ GLvoid GameManager::keyPressed(unsigned char key){
 		case 'n':
 			//TODO Ligar ou desligar iluminacao global
 			break;
+            
+        case 'c':
+            Vector4 emiss = Vector4(0.0, 0.0, 0.0, 1.0);
+            
+            for (int i = 0; i < _pointlights.size(); i++){
+                _lightsources[i+1].switchOn();              // without lightsource 0
+                
+                if(_pointlights[i].getEmissionX()==0)
+                    emiss.set(0.5, 0.5, 0.5, 0.0);
+                else
+                    emiss.set(0.0, 0.0, 0.0, 1.0);
+            
+                _pointlights[i].setMatEmission(emiss.getX(), emiss.getY(), emiss.getZ(), emiss.getW());
+            }
     }
-    printf("%f, %f\n", rotate_x, rotate_y);
+    
 }
 
 GLvoid GameManager::lightCalculationChanged(){
@@ -96,6 +127,56 @@ GLvoid GameManager::display(GLboolean solidOrWire) {
 
     glRotatef( rotate_x, 1.0, 0.0, 0.0 );
     glRotatef( rotate_y, 0.0, 1.0, 0.0 );
+    
+    /* TODO - TIRAR */
+    GLfloat amb_shelter[]={0.02f,0.02f,0.02f,1.0f};
+    GLfloat diff_shelter[]={0.01f,0.01f,0.01f,1.0f};
+    GLfloat spec_shelter[]={0.4f,0.4f,0.4f,1.0f};
+    GLfloat shine_shelter=10.0f;
+    glPushMatrix();
+    glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT,amb_shelter);
+    glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE,diff_shelter);
+    glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,spec_shelter);
+    glMaterialf(GL_FRONT_AND_BACK,GL_SHININESS,shine_shelter);
+    
+    GLfloat emiss[] = {0.0, 0.0, 0.0, 1.0};
+    glMaterialfv(GL_FRONT, GL_EMISSION, emiss);
+    glTranslatef(ROAD_OUT_RADIUS-ROAD_WIDTH/2, 0, ROAD_WIDTH/6);
+    glScalef(ROAD_WIDTH/3, 10, ROAD_WIDTH/3);
+    glColor4b(0, 0, 0, 0.5);
+    glBegin(GL_QUADS);
+    
+    //Front
+    glNormal3f(0.0f, 0.0f, 1.0f);
+    glVertex3f(-1.5f, -1.0f, 1.5f);
+    glVertex3f(1.5f, -1.0f, 1.5f);
+    glVertex3f(1.5f, 1.0f, 1.5f);
+    glVertex3f(-1.5f, 1.0f, 1.5f);
+    
+    //Right
+    glNormal3f(1.0f, 0.0f, 0.0f);
+    glVertex3f(1.5f, -1.0f, -1.5f);
+    glVertex3f(1.5f, 1.0f, -1.5f);
+    glVertex3f(1.5f, 1.0f, 1.5f);
+    glVertex3f(1.5f, -1.0f, 1.5f);
+    
+    //Back
+    glNormal3f(0.0f, 0.0f, -1.0f);
+    glVertex3f(-1.5f, -1.0f, -1.5f);
+    glVertex3f(-1.5f, 1.0f, -1.5f);
+    glVertex3f(1.5f, 1.0f, -1.5f);
+    glVertex3f(1.5f, -1.0f, -1.5f);
+    
+    //Left
+    glNormal3f(-1.0f, 0.0f, 0.0f);
+    glVertex3f(-1.5f, -1.0f, -1.5f);
+    glVertex3f(-1.5f, -1.0f, 1.5f);
+    glVertex3f(-1.5f, 1.0f, 1.5f);
+    glVertex3f(-1.5f, 1.0f, -1.5f);
+    
+    glEnd();
+    
+    glPopMatrix();
 
     _table.draw();
     _car.draw();
@@ -110,6 +191,9 @@ GLvoid GameManager::display(GLboolean solidOrWire) {
     
     for (int i = 0; i < _cheerios_out.size(); i++)
         _cheerios_out[i].draw();
+    
+    for (int i = 0; i < _lightsources.size(); i++)
+        _lightsources[i].draw();
     
     for (int i = 0; i < _pointlights.size(); i++)
         _pointlights[i].draw();
@@ -134,6 +218,10 @@ GLvoid GameManager::changedCamera(){
 
 GLvoid GameManager::update(GLdouble delta_t){
     
+    if (_car.getLives()<=0) {
+        _itsOver = true;
+    }
+    
     //update positions
     _car.update(delta_t);
     
@@ -156,7 +244,7 @@ GLvoid GameManager::update(GLdouble delta_t){
     Vector3 direction = Vector3();
     for( GLint i = 0; i < NUM_ORANGES; i++){ // car - oranges
         if(detectCollision(_car, _oranges[i], direction)){
-            printf("collision detected with oranges\n");
+            //printf("collision detected with oranges\n");
             _car.reset();
             break;
         }
@@ -164,7 +252,7 @@ GLvoid GameManager::update(GLdouble delta_t){
     
     for( GLint i = 0; i < _cheerios_in.size(); i++){
         if(detectCollision(_car, _cheerios_in[i], direction)){
-            printf("collision detected with cheerios_in\n");
+            //printf("collision detected with cheerios_in\n");
             _cheerios_in[i].crash(direction.angle(),_car.getVel());
             _car.crash();
         }
@@ -172,7 +260,7 @@ GLvoid GameManager::update(GLdouble delta_t){
     
     for( GLint i = 0; i < _cheerios_out.size(); i++){
         if(detectCollision(_car, _cheerios_out[i], direction)){
-            printf("collision detected with cheerios_out\n");
+            //printf("collision detected with cheerios_out\n");
             _cheerios_out[i].crash(direction.angle(),_car.getVel());
             _car.crash();
         }
@@ -180,7 +268,7 @@ GLvoid GameManager::update(GLdouble delta_t){
     for( GLint i = 0; i < _cheerios_in.size(); i++){
         for( GLint j = 0; j < _cheerios_in.size(); j++){
             if(i!=j && detectCollision(_cheerios_in[i], _cheerios_in[j], direction)){
-                printf("collision detected with cheerios_in\n");
+                //printf("collision detected with cheerios_in\n");
                 _cheerios_in[j].crash(direction.angle(),10);
                 _cheerios_in[i].crash(direction.angle()+180,5);
             }
@@ -190,7 +278,7 @@ GLvoid GameManager::update(GLdouble delta_t){
     for( GLint i = 0; i < _cheerios_out.size(); i++){
         for( GLint j = 0; j < _cheerios_out.size(); j++){
             if(i!=j && detectCollision(_cheerios_out[i], _cheerios_out[j], direction)){
-                printf("collision detected with cheerios_in\n");
+                //printf("collision detected with cheerios_in\n");
                 _cheerios_out[j].crash(direction.angle(),5);
                 _cheerios_out[i].crash(direction.angle()+180,5);
             }
@@ -200,7 +288,7 @@ GLvoid GameManager::update(GLdouble delta_t){
     for( GLint i = 0; i < _cheerios_in.size(); i++){
         for( GLint j = 0; j < _cheerios_out.size(); j++){
             if(i!=j && detectCollision(_cheerios_in[i], _cheerios_out[j], direction)){
-                printf("collision detected with cheerios_in\n");
+                //printf("collision detected with cheerios_in\n");
                 _cheerios_in[i].crash(direction.angle()+180,5);
                 _cheerios_out[j].crash(direction.angle(),5);
             }
@@ -209,7 +297,7 @@ GLvoid GameManager::update(GLdouble delta_t){
     
     for( GLint i = 0; i < _butters.size(); i++){
         if(detectCollision(_car, _butters[i], direction)){
-            printf("collision detected with butters\n");
+            //printf("collision detected with butters\n");
             _butters[i].crash(direction.angle(),_car.getVel());
             _car.crash();
         }
@@ -269,11 +357,27 @@ GLvoid GameManager::init(){
     //Game table
     _table = Table();
     
+    
+    // Light Source 0
+    Lightsource lightsource = Lightsource(0);
+    lightsource.setPosition(1,0,1);
+    lightsource.setDirection(0, 0, -1);
+    lightsource.setAmbient(0.8, 0.8, 0.8, 1);
+    lightsource.setDiffuse(0.5, 0.5, 0.5, 1);
+    lightsource.setSpecular(0.2, 0.2, 0.2, 1);
+    _lightsources.push_back(lightsource);
+    
+    
     //point lights
+    GLint i = 1;
     for(float angle = 0; angle < 2 * M_PI - lightIncrement; angle = angle + lightIncrement){
-        printf("x: %d y: %d angle: %d\n", RADIUS_POINTLIGHTS * cosf(angle), RADIUS_POINTLIGHTS * sinf(angle), angle);
         Pointlight pointlight = Pointlight(RADIUS_POINTLIGHTS * cosf(angle), RADIUS_POINTLIGHTS * sinf(angle), 0);
         _pointlights.push_back(pointlight);
+        
+        Lightsource lightsource = Lightsource(i);
+        lightsource.setPosition(pointlight.getPositionX(), pointlight.getPositionY(), pointlight.getPositionZ()+20);
+        _lightsources.push_back(lightsource);
+        i++;
     }
     
 }

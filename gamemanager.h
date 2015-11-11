@@ -3,12 +3,14 @@
 #include "gameobject.h"
 #include "dynamicobject.h"
 #include "vector3.h"
+#include "vector4.h"
 #include "table.h"
 #include "car.h"
 #include "cheerio.h"
 #include "orange.h"
 #include "butter.h"
 #include "pointlight.h"
+#include "lightsource.h"
 #include "camera.h"
 #include "orthocamera.h"
 #include "perspectivecamera.h"
@@ -26,15 +28,18 @@ private:
     std::vector<Orange> _oranges;
     std::vector<Butter> _butters;
     std::vector<Pointlight> _pointlights;
+    std::vector<Lightsource> _lightsources;
     
 	std::vector<std::shared_ptr<Camera>> _cameras;
 	int _currentCamera;
     /* TODO missing light_sources */
     
-    GLboolean _solidOrWire;
-    GLdouble rotate_y;
-    GLdouble rotate_x;
-	GLboolean _light_calculation;
+    GLboolean   _solidOrWire;
+    GLdouble    rotate_y;
+    GLdouble    rotate_x;
+	GLboolean   _light_calculation;
+    GLboolean   _daylight;
+    GLboolean   _itsOver;
 public:
     GameManager();
     ~GameManager();
@@ -47,6 +52,7 @@ public:
     GLboolean getKeyDown();
     GLboolean getKeyRight();
     GLboolean getKeyLeft();
+    GLboolean itsOver();
     GLvoid setKeyUp(GLboolean value);
     GLvoid setKeyDown(GLboolean value);
     GLvoid setKeyRight(GLboolean value);

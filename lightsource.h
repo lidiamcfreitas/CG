@@ -1,17 +1,36 @@
 #pragma once
+#include "vector4.h"
 #include "vector3.h"
+#include "gameobject.h"
 #include <array>
 
-class lightsource{
+class Lightsource: public GameObject{
 
 private:
-	GLfloat _param_light_model[4];
-	GLfloat _ambient[4];
-	GLfloat _diffuse[4];
-	GLfloat _specular[4];
+    Vector4 _param_light_model;
+	Vector4 _ambient;
+	Vector4 _diffuse;
+	Vector4 _specular;
+    Vector3 _direction;
+    GLfloat	_cut_off;
+    GLfloat _exponent;
+    GLboolean _on;
+    GLint   _id;
 
 public:
-	lightsource();
-	~lightsource();
+	Lightsource(GLint num);
+	~Lightsource();
+    GLvoid draw();
+    GLvoid setDirection(GLdouble x, GLdouble y, GLdouble z);
+    GLvoid setCutOff(GLfloat cut_off);
+    GLvoid setExponent(GLfloat exponent);
+    GLvoid setAmbient(GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+    GLvoid setDiffuse(GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+    GLvoid setSpecular(GLfloat x, GLfloat y, GLfloat z, GLfloat w);
+    GLvoid setOn(GLboolean on);
+    GLvoid switchOn();
+    GLboolean getOn();
+    
+    
 };
 

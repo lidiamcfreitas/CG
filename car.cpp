@@ -11,6 +11,7 @@ Car::Car(): DynamicObject() {
     _left = false;
     _previous_position  = Vector3();
     _hitboxRadius = 7.04;//7.04
+    _lives = LIVES;
     setPosition(95, -6.5, 0);//95,-6.5,0
 	setSpeed(0, 1, 0);
 }
@@ -25,6 +26,7 @@ GLvoid Car::setKeyUp(GLboolean value){ _up = value; }
 GLvoid Car::setKeyDown(GLboolean value){ _down = value; }
 GLvoid Car::setKeyRight(GLboolean value){ _right = value; }
 GLvoid Car::setKeyLeft(GLboolean value){ _left = value; }
+GLint Car::getLives(){ return _lives; }
 GLvoid Car::crash(){
     setPosition(_previous_position.getX(), _previous_position.getY(), _previous_position.getZ());
     _vel = 0;
@@ -39,20 +41,33 @@ GLvoid Car::reset(){
     _angle = 90;
     setPosition(95, -6.5, 0);//95,-6.5,0
     setSpeed(0, 1, 0);
+    printf("lost a life\n");
+    _lives--;
 }
 
 GLvoid Car::draw(){
     
-    GLboolean solidOrWire = getSolidOrWire(); /* TODO rever */
+    GLboolean solidOrWire = getSolidOrWire();
+    
+    GLfloat amb[]={0.0215f,0.1745f,0.0215f,1.0f};
+    GLfloat diff[]={0.07568f,0.47f,0.07568f,1.0f};
+    GLfloat spec[]={0.633f,0.727811f,0.633f,1.0f};
+    GLfloat shine=76.8f;
+    
+    GLfloat amb_red[]={0.1745f,0.01175f,0.01175f,1.0f};
+    GLfloat diff_red[]={0.61424f,0.04136f,0.04136f,1.0f};
+    GLfloat spec_red[]={0.727811f,0.626959f,0.626959f,1.0f};
+    GLfloat shine_red=76.8f;
 
 	glPushMatrix();
     
-    glTranslatef(getPosition().getX(), getPosition().getY(), getPosition().getZ());
+    glTranslatef(getPositionX(), getPositionY(), getPositionZ());
     glRotatef(_angle-90, 0.0, 0.0, 1.0);
     
     //---------------------------------------main body
     glColor3f(0.0, 0.5, 0.0);//dark green
 	glPushMatrix();
+    material(amb, diff, spec, shine);
     glTranslatef(0.0, 0.0, 3.0);
     glScalef(1.0f, 1.2f, 0.7f);
     
@@ -66,6 +81,7 @@ GLvoid Car::draw(){
     //---------------------------------------front body
     glColor3f(0.0, 0.5, 0.0);//dark green
 	glPushMatrix();
+    material(amb, diff, spec, shine);
     glTranslatef(0.0, 4.0, 1.3f);
     glScalef(1.5f, 1.0f, 1.0f);
     if(solidOrWire) {
@@ -79,6 +95,7 @@ GLvoid Car::draw(){
     //---------------------------------------back body
     glColor3f(0.0,  0.5, 0.0);//dark green
 	glPushMatrix();
+    material(amb, diff, spec, shine);
     glTranslatef(0.0, 3.5, 2.1);
     glScalef(3.0f, 1.0f, 3.5f);
     if(solidOrWire){
@@ -92,6 +109,7 @@ GLvoid Car::draw(){
     //--------------------------------------front axis
     glColor3f(0.7, 0.0, 0.0);//red
     glPushMatrix();
+    material(amb_red, diff_red, spec_red, shine_red);
     glTranslatef(0.0, 4.5, 1.5f);
     glScalef(26.0f, 1.0f, 1.0f);
     if(solidOrWire){
@@ -113,9 +131,15 @@ GLvoid Car::draw(){
 }
 
 GLvoid Car::drawWheel(GLfloat wheelx, GLfloat wheely, GLfloat wheelz, GLfloat wheelInner, GLfloat wheelOuter, GLboolean solidOrWire){
+    GLfloat amb_wheel[]={0.02f,0.02f,0.02f,1.0f};
+    GLfloat diff_wheel[]={0.01f,0.01f,0.01f,1.0f};
+    GLfloat spec_wheel[]={0.4f,0.4f,0.4f,1.0f};
+    GLfloat shine_wheel=10.0f;
+    
     GLfloat xtilt = 0.0;
     glColor3f(0.26, 0.15, 0.2);//dark grey
     glPushMatrix();
+    material(amb_wheel, diff_wheel, spec_wheel, shine_wheel);
     if(_right && wheelOuter == 1.0){
         xtilt = -0.3;
     }
@@ -135,7 +159,7 @@ GLvoid Car::drawWheel(GLfloat wheelx, GLfloat wheely, GLfloat wheelz, GLfloat wh
 
 GLvoid Car::update(GLdouble delta_t){
     
-    _previous_position.set(getPosition().getX(), getPosition().getY(), getPosition().getZ());
+    _previous_position.set(getPositionX(), getPositionY(), getPositionZ());
     GLboolean felloff = false;
     
     GLdouble delta_x = cos(_angle*M_PI/180)*_vel*delta_t/1000;
@@ -144,12 +168,12 @@ GLvoid Car::update(GLdouble delta_t){
 	if (_vel != 0 && std::abs(_vel) > 3)
 		setSpeed(delta_x, delta_y, delta_z);
     
-    if (fabs(getPosition().getX()) >(125. + _hitboxRadius*0.7 ) || fabs(getPosition().getY()) >(125. + _hitboxRadius*0.7 )) {
-        setPosition(getPosition().getX() + delta_x, getPosition().getY() + delta_y, getPosition().getZ()-1.5);
+    if (fabs(getPositionX()) >(125. + _hitboxRadius*0.7 ) || fabs(getPositionY()) >(125. + _hitboxRadius*0.7 )) {
+        setPosition(getPositionX() + delta_x, getPositionY() + delta_y, getPositionZ()-1.5);
         felloff = true;
     } else {
         if (!felloff) {
-            setPosition(getPosition().getX() + delta_x, getPosition().getY() + delta_y, getPosition().getZ() + delta_z);
+            setPosition(getPositionX() + delta_x, getPositionY() + delta_y, getPositionZ() + delta_z);
             if(_up && _vel < CAR_VEL_MAX){
                 _vel = _vel + CAR_ACCEL * delta_t/1000;// defines forward acceleration
             }
@@ -173,8 +197,10 @@ GLvoid Car::update(GLdouble delta_t){
             }
         }
     }
-    if ((fabs(getPosition().getX()) >(125. + _hitboxRadius*0.7 ) || fabs(getPosition().getY()) >(125. + _hitboxRadius*0.7 )) &&  getPosition().getZ()<-70) {
+    if ((fabs(getPositionX()) >(125. + _hitboxRadius*0.7 ) || fabs(getPositionY()) >(125. + _hitboxRadius*0.7 )) &&  getPositionZ()<-70) {
         felloff = false;
+        printf("lost a life\n");
+        _lives--;
         setPosition(95.0, -6.5, 0.0); // Initial position
         setVel(0.0);
         setAngle(90.0);

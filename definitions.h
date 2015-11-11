@@ -29,6 +29,7 @@
 #define ROAD_OUT_RADIUS         120
 #define ROAD_WIDTH              40
 #define TABLE_SIZE              250
+#define LIVES                   5
 
 // CAR
 #define CAR_VEL_MAX             110
@@ -50,7 +51,7 @@
 // CHEERIOS
 #define CHEERIO_RADIUS_TUBE     1
 #define CHEERIO_RADIUS          3
-#define CHEERIO_DEACCEL         10*_vel
+#define CHEERIO_DEACCEL         5*_vel
 #define CHEERIO_REL_MASS        0.3
 
 // CAMERAS
@@ -66,6 +67,9 @@
 // POINTLIGHTS
 #define NUM_POINTLIGHTS         6
 #define RADIUS_POINTLIGHTS      125
+
+// LIGHTSOURCES
+#define NUM_LIGHTSOURCES        7
 
 GLvoid main_wakeupOrange(int value);
 #endif /* definitions_h */
