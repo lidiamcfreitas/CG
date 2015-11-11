@@ -5,8 +5,9 @@ GameManager::GameManager() {
     rotate_x = -65;
     rotate_y = 0;
 	_light_calculation = false;
-    _daylight = true;
+    _daylighte = true;
     _itsOver = false;
+	_shadingRegular = true;
 }
 
 GameManager::~GameManager(){
@@ -79,25 +80,30 @@ GLvoid GameManager::keyPressed(unsigned char key){
 			break;
 		case 'g':
 			//TODO Alterar entre constante e Gouraud
+			_shadingRegular = !_shadingRegular;
+			if (_shadingRegular)
+				glShadeModel(GL_FLAT);
+			else
+				glShadeModel(GL_SMOOTH);
 			break;
 		case 'n':
 			//TODO Ligar ou desligar iluminacao global
-            _daylight = !_daylight;
+            _daylighte = !_daylighte;
             _lightsources[0].switchOn();
 			break;
             
         case 'c':
             Vector4 emiss = Vector4(0.0, 0.0, 0.0, 1.0);
             
-            for (int i = 1; i < _pointlights.size(); i++){
+            for (int i = 1; i < _lightsources.size()-1; i++){  
                 _lightsources[i].switchOn();              // without lightsource 0
-                
-                if(_pointlights[i].getEmissionX()==0)
+				
+                if(_pointlights[i-1].getEmissionX()==0)
                     emiss.set(0.5, 0.5, 0.5, 0.0);
                 else
                     emiss.set(0.0, 0.0, 0.0, 1.0);
             
-                _pointlights[i].setMatEmission(emiss.getX(), emiss.getY(), emiss.getZ(), emiss.getW());
+                _pointlights[i-1].setMatEmission(emiss.getX(), emiss.getY(), emiss.getZ(), emiss.getW());
             }
     }
     
@@ -188,6 +194,7 @@ GLvoid GameManager::display(GLboolean solidOrWire) {
     
     for (int i = 0; i < _oranges.size(); i++)
         _oranges[i].draw();
+
     for (int i = 0; i < _cheerios_in.size(); i++)
         _cheerios_in[i].draw();
     
@@ -321,7 +328,7 @@ GLboolean GameManager::detectCollision(DynamicObject &obj1, DynamicObject &obj2,
 }
 
 GLvoid GameManager::init(){
-
+	glShadeModel(GL_FLAT);
 	//Lighting set up
 
 

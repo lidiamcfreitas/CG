@@ -1,8 +1,6 @@
 #ifndef pointlight_hpp
 #define pointlight_hpp
 
-#include <stdio.h>
-
 #include "DynamicObject.h"
 #include "vector4.h"
 

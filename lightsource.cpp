@@ -3,12 +3,12 @@
 
 Lightsource::Lightsource(GLint num){
     _param_light_model.set(0.2, 0.2, 0.2, 1);
-	_ambient.set(1.0, 1.0, 1.0, 1);
-	_diffuse.set(1.0,1.0,1.0,1.0);
-    _specular.set(1.0,1.0,1.0,1.0);
+	_ambient.set(1.0, 1.0, 1.0, 1.0);
+	_diffuse.set(1.0, 1.0, 1.0, 1.0);
+    _specular.set(1.0, 1.0, 1.0, 1.0);
     _direction.set(0, 0, -1);
-    _cut_off = 75;
-    _exponent = 2;
+    _cut_off = 85;
+    _exponent = 1;
     _id = num;
     _on = false;
 }
@@ -41,9 +41,9 @@ GLvoid Lightsource::draw(){
     
     glLightfv(GL_LIGHT0 + _id, GL_SPOT_DIRECTION, direction);
     
-    glLightfv(GL_LIGHT0 + _id, GL_SPOT_CUTOFF, &_cut_off);
+    glLightf(GL_LIGHT0 + _id, GL_SPOT_CUTOFF, _cut_off);
     
-    glLightfv(GL_LIGHT0 + _id, GL_SPOT_EXPONENT, &_exponent);
+    glLightf(GL_LIGHT0 + _id, GL_SPOT_EXPONENT, _exponent);
 }
 
 GLvoid Lightsource::update(Car car){
