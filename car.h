@@ -1,5 +1,6 @@
 #pragma once
 #include "dynamicobject.h"
+#include "vector4.h"
 
 class Car : public DynamicObject{
 private:
@@ -9,6 +10,7 @@ private:
     GLboolean   _left;
     GLint       _lives;
     Vector3     _previous_position;
+    Vector4     _lights_mat_emiss;
 public:
 	Car();
 	~Car();

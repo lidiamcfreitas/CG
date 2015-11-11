@@ -12,6 +12,7 @@ Car::Car(): DynamicObject() {
     _previous_position  = Vector3();
     _hitboxRadius = 7.04;//7.04
     _lives = LIVES;
+    _lights_mat_emiss.set(0.5, 0.5, 0.5, 0);
     setPosition(95, -6.5, 0);//95,-6.5,0
 	setSpeed(0, 1, 0);
 }
@@ -58,6 +59,11 @@ GLvoid Car::draw(){
     GLfloat diff_red[]={0.61424f,0.04136f,0.04136f,1.0f};
     GLfloat spec_red[]={0.727811f,0.626959f,0.626959f,1.0f};
     GLfloat shine_red=76.8f;
+    
+    GLfloat amb_lights[]={0.05f,0.05f,0.0f,1.0f};
+    GLfloat diff_lights[]={0.5f,0.5f,0.4f,1.0f};
+    GLfloat spec_lights[]={0.7f,0.7f,0.04f,1.0f};
+    GLfloat shine_lights=10.0f;
 
 	glPushMatrix();
     
@@ -118,6 +124,31 @@ GLvoid Car::draw(){
     else{
         glutWireCube(0.25);
     }
+    glPopMatrix();
+    
+    //--------------------------------------lights
+    glColor3f(1, 1, 0.0);//yellow
+    glPushMatrix();
+    material(amb_lights, diff_lights, spec_lights, shine_lights);
+    glTranslatef(0.0, 5, 1.5f);
+    GLfloat emiss[]={_lights_mat_emiss.getX(),_lights_mat_emiss.getY(),_lights_mat_emiss.getZ(),_lights_mat_emiss.getW()};
+    glMaterialfv(GL_FRONT, GL_EMISSION, emiss);
+    glPushMatrix();
+    glTranslatef(1, 0, 0);
+    if(solidOrWire)
+        glutSolidCube(1);
+    else
+        glutWireCube(1);
+    glPopMatrix();
+    
+    glPushMatrix();
+    glTranslatef(-1, 0, 0);
+    if(solidOrWire)
+        glutSolidCube(1);
+    else
+        glutWireCube(1);
+    glPopMatrix();
+    
     glPopMatrix();
     
     drawWheel(2.7, 4.5, 1.6, 0.6, 1.0, solidOrWire);//front right wheel

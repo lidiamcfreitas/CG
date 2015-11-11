@@ -19,7 +19,11 @@ Lightsource::~Lightsource()
 }
 
 GLvoid Lightsource::draw(){
-    GLfloat position[] = {(GLfloat) getPositionX(), (GLfloat) getPositionY(),(GLfloat) getPositionZ(), 1};
+    GLfloat position[] = {(GLfloat) getPositionX(), (GLfloat) getPositionY(),(GLfloat) getPositionZ(), 0};
+    if (_id) {
+        position[3] = 1;
+    }
+    
     //GLfloat ambColor[] = {_param_light_model.getX(),_param_light_model.getY(),_param_light_model.getZ(),_param_light_model.getW()};
     GLfloat ambient[] = {_ambient.getX(),_ambient.getY(),_ambient.getZ(),_ambient.getW()};
     GLfloat specular[] = {_specular.getX(),_specular.getY(),_specular.getZ(),_specular.getW()};
@@ -29,16 +33,22 @@ GLvoid Lightsource::draw(){
     glLightfv(GL_LIGHT0 + _id, GL_POSITION, position);
     glLightfv(GL_LIGHT0 + _id, GL_AMBIENT, ambient);
     glLightfv(GL_LIGHT0 + _id, GL_SPECULAR, specular);
-    glLightfv(GL_LIGHT0 + _id, GL_DIFFUSE,diffuse);
+    glLightfv(GL_LIGHT0 + _id, GL_DIFFUSE, diffuse);
     
     if (_id==0) return;
     
     GLfloat direction[] = {(GLfloat)_direction.getX(),(GLfloat)_direction.getY(),(GLfloat)_direction.getZ()};
+    
     glLightfv(GL_LIGHT0 + _id, GL_SPOT_DIRECTION, direction);
     
     glLightfv(GL_LIGHT0 + _id, GL_SPOT_CUTOFF, &_cut_off);
     
     glLightfv(GL_LIGHT0 + _id, GL_SPOT_EXPONENT, &_exponent);
+}
+
+GLvoid Lightsource::update(Car car){
+    setPosition(car.getPositionX()+1, car.getPositionY()+5, car.getPositionZ()+1.5);
+    printf("%f %f %f\n", car.getPositionX(), car.getPositionY(), car.getPositionZ());
 }
 
 GLvoid Lightsource::setDirection(GLdouble x, GLdouble y, GLdouble z){

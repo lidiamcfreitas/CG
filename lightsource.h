@@ -2,6 +2,7 @@
 #include "vector4.h"
 #include "vector3.h"
 #include "gameobject.h"
+#include "car.h"
 #include <array>
 
 class Lightsource: public GameObject{
@@ -30,6 +31,7 @@ public:
     GLvoid setOn(GLboolean on);
     GLvoid switchOn();
     GLboolean getOn();
+    GLvoid update(Car car);
     
     
 };

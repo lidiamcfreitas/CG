@@ -82,13 +82,15 @@ GLvoid GameManager::keyPressed(unsigned char key){
 			break;
 		case 'n':
 			//TODO Ligar ou desligar iluminacao global
+            _daylight = !_daylight;
+            _lightsources[0].switchOn();
 			break;
             
         case 'c':
             Vector4 emiss = Vector4(0.0, 0.0, 0.0, 1.0);
             
-            for (int i = 0; i < _pointlights.size(); i++){
-                _lightsources[i+1].switchOn();              // without lightsource 0
+            for (int i = 1; i < _pointlights.size(); i++){
+                _lightsources[i].switchOn();              // without lightsource 0
                 
                 if(_pointlights[i].getEmissionX()==0)
                     emiss.set(0.5, 0.5, 0.5, 0.0);
@@ -239,6 +241,10 @@ GLvoid GameManager::update(GLdouble delta_t){
 	//update current camera
 	_cameras[_currentCamera]->update(_car.getPosition(), _car.getAngle());
     
+    //update lightsource
+    _lightsources[7].update(_car);
+    //_lightsources[8].update(_car);
+    
     //collisions
     
     Vector3 direction = Vector3();
@@ -379,6 +385,12 @@ GLvoid GameManager::init(){
         _lightsources.push_back(lightsource);
         i++;
     }
+    lightsource = Lightsource(7);
+    lightsource.setPosition(_car.getPositionX(),_car.getPositionY(),_car.getPositionZ());
+    //GLfloat norm = _car.getSpeed().norm();
+    //lightsource.setDirection(_car.getSpeed().getX()/norm, _car.getSpeed().getY()/norm, _car.getSpeed().getZ()/norm);
+    _lightsources.push_back(lightsource);
+    //_lightsources.push_back(Lightsource(8));
     
 }
 
