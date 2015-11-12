@@ -8,7 +8,6 @@
 class Lightsource: public GameObject{
 
 private:
-    Vector4 _param_light_model;
 	Vector4 _ambient;
 	Vector4 _diffuse;
 	Vector4 _specular;

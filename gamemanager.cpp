@@ -5,7 +5,7 @@ GameManager::GameManager() {
     rotate_x = -65;
     rotate_y = 0;
 	_light_calculation = false;
-    _daylighte = true;
+    _daylight = true;
     _itsOver = false;
 	_shadingRegular = true;
 }
@@ -79,7 +79,6 @@ GLvoid GameManager::keyPressed(unsigned char key){
             }
 			break;
 		case 'g':
-			//TODO Alterar entre constante e Gouraud
 			_shadingRegular = !_shadingRegular;
 			if (_shadingRegular)
 				glShadeModel(GL_FLAT);
@@ -87,8 +86,7 @@ GLvoid GameManager::keyPressed(unsigned char key){
 				glShadeModel(GL_SMOOTH);
 			break;
 		case 'n':
-			//TODO Ligar ou desligar iluminacao global
-            _daylighte = !_daylighte;
+            _daylight = !_daylight;
             _lightsources[0].switchOn();
 			break;
             
@@ -98,7 +96,8 @@ GLvoid GameManager::keyPressed(unsigned char key){
             for (int i = 1; i < _lightsources.size()-1; i++){  
                 _lightsources[i].switchOn();              // without lightsource 0
 				
-                if(_pointlights[i-1].getEmissionX()==0)
+                //if(_pointlights[i-1].getEmissionX()==0)
+                if(_lightsources[i].getOn())
                     emiss.set(0.5, 0.5, 0.5, 0.0);
                 else
                     emiss.set(0.0, 0.0, 0.0, 1.0);

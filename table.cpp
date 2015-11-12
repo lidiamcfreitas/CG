@@ -46,7 +46,7 @@ GLvoid Table::draw(){
     material(amb, diff, spec, shine);
     glTranslatef(0.0, 0.0, 0.11);
     glRotatef(90, 0, 1, 0);
-    glutSolidSphere(ROAD_OUT_RADIUS - ROAD_WIDTH, 2, 16);
+    glutSolidSphere(ROAD_OUT_RADIUS - ROAD_WIDTH, 2, 400);
     glPopMatrix();
     
     //outter table ring
@@ -55,7 +55,7 @@ GLvoid Table::draw(){
     material(amb_obsidian, diff_obsidian, spec_obsidian, shine_obsidian);
     glTranslatef(0.0, 0.0, 0.1);
     glRotatef(90, 0, 1, 0);
-    glutSolidSphere(ROAD_OUT_RADIUS, 2, 16);
+    glutSolidSphere(ROAD_OUT_RADIUS, 2, 600);
     glPopMatrix();
     
     glPopMatrix();
