@@ -1,6 +1,7 @@
 #pragma once
 #include "dynamicobject.h"
 #include "vector4.h"
+#include "math.h"
 
 class Car : public DynamicObject{
 private:
