@@ -136,56 +136,6 @@ GLvoid GameManager::display(GLboolean solidOrWire) {
     glRotatef( rotate_x, 1.0, 0.0, 0.0 );
     glRotatef( rotate_y, 0.0, 1.0, 0.0 );
     
-    /* TODO - TIRAR */
-    GLfloat amb_shelter[]={0.02f,0.02f,0.02f,1.0f};
-    GLfloat diff_shelter[]={0.01f,0.01f,0.01f,1.0f};
-    GLfloat spec_shelter[]={0.4f,0.4f,0.4f,1.0f};
-    GLfloat shine_shelter=10.0f;
-    glPushMatrix();
-    glMaterialfv(GL_FRONT_AND_BACK,GL_AMBIENT,amb_shelter);
-    glMaterialfv(GL_FRONT_AND_BACK,GL_DIFFUSE,diff_shelter);
-    glMaterialfv(GL_FRONT_AND_BACK,GL_SPECULAR,spec_shelter);
-    glMaterialf(GL_FRONT_AND_BACK,GL_SHININESS,shine_shelter);
-    
-    GLfloat emiss[] = {0.0, 0.0, 0.0, 1.0};
-    glMaterialfv(GL_FRONT, GL_EMISSION, emiss);
-    glTranslatef(ROAD_OUT_RADIUS-ROAD_WIDTH/2, 0, ROAD_WIDTH/6);
-    glScalef(ROAD_WIDTH/3, 10, ROAD_WIDTH/3);
-    glColor4b(0, 0, 0, 0.5);
-    glBegin(GL_QUADS);
-    
-    //Front
-    glNormal3f(0.0f, 0.0f, 1.0f);
-    glVertex3f(-1.5f, -1.0f, 1.5f);
-    glVertex3f(1.5f, -1.0f, 1.5f);
-    glVertex3f(1.5f, 1.0f, 1.5f);
-    glVertex3f(-1.5f, 1.0f, 1.5f);
-    
-    //Right
-    glNormal3f(1.0f, 0.0f, 0.0f);
-    glVertex3f(1.5f, -1.0f, -1.5f);
-    glVertex3f(1.5f, 1.0f, -1.5f);
-    glVertex3f(1.5f, 1.0f, 1.5f);
-    glVertex3f(1.5f, -1.0f, 1.5f);
-    
-    //Back
-    glNormal3f(0.0f, 0.0f, -1.0f);
-    glVertex3f(-1.5f, -1.0f, -1.5f);
-    glVertex3f(-1.5f, 1.0f, -1.5f);
-    glVertex3f(1.5f, 1.0f, -1.5f);
-    glVertex3f(1.5f, -1.0f, -1.5f);
-    
-    //Left
-    glNormal3f(-1.0f, 0.0f, 0.0f);
-    glVertex3f(-1.5f, -1.0f, -1.5f);
-    glVertex3f(-1.5f, -1.0f, 1.5f);
-    glVertex3f(-1.5f, 1.0f, 1.5f);
-    glVertex3f(-1.5f, 1.0f, -1.5f);
-    
-    glEnd();
-    
-    glPopMatrix();
-
     _table.draw();
     _car.draw();
     
