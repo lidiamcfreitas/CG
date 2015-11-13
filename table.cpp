@@ -20,7 +20,6 @@ GLvoid Table::draw(){
     
     glPushMatrix();
     
-    
     //start line
     glPushMatrix();
     glColor3f(1, 0, 0);

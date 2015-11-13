@@ -38,7 +38,7 @@ private:
     GLdouble    rotate_y;
     GLdouble    rotate_x;
 	GLboolean   _light_calculation;
-    GLboolean   _daylight;
+    GLboolean   _daylighte;
     GLboolean   _itsOver;
 	GLboolean	_shadingRegular;
 public:

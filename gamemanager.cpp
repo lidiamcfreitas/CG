@@ -5,7 +5,7 @@ GameManager::GameManager() {
     rotate_x = -65;
     rotate_y = 0;
 	_light_calculation = false;
-    _daylight = true;
+    _daylighte = false;
     _itsOver = false;
 	_shadingRegular = true;
 }
@@ -73,10 +73,21 @@ GLvoid GameManager::keyPressed(unsigned char key){
 		case 'l':
 			_light_calculation = !_light_calculation;
 			lightCalculationChanged();
+
+            if (!_light_calculation && _daylighte){
+                _lightsources[0].setOn(false);
+                _daylighte = !daylight;
+            }
             
-            for (int i=0; i<NUM_ORANGES;i++){ // To remove artificial shadow when calculation on
+            for (int i=0; i<NUM_ORANGES;i++){ // To remove artificial shadow when calculation is on
                 _oranges[i].switchShadow();
             }
+            
+            if (!_light_calculation)
+                glClearColor( 65./255, 105./255, 1., 0.);
+            else
+                glClearColor(0, 51./255, 102./255, 0);
+            
 			break;
 		case 'g':
 			_shadingRegular = !_shadingRegular;
@@ -86,8 +97,16 @@ GLvoid GameManager::keyPressed(unsigned char key){
 				glShadeModel(GL_SMOOTH);
 			break;
 		case 'n':
-            _daylight = !_daylight;
-            _lightsources[0].switchOn();
+            
+            if (_light_calculation) {
+                _daylighte = !_daylighte;
+                _lightsources[0].switchOn();
+                
+                if (_daylighte)
+                    glClearColor( 65./255, 105./255, 1., 0.);
+                else
+                    glClearColor(0, 51./255, 102./255, 0);
+            }
 			break;
             
         case 'c':
