@@ -5,11 +5,7 @@ GameManager::GameManager() {
     rotate_x = -65;
     rotate_y = 0;
 	_light_calculation = false;
-<<<<<<< HEAD
     _daylighte = false;
-=======
-    _daylight = true;
->>>>>>> a2a08ce2e115696e6d24f4e1a09decf1887ab658
     _itsOver = false;
 	_shadingRegular = true;
 }
@@ -101,7 +97,6 @@ GLvoid GameManager::keyPressed(unsigned char key){
 				glShadeModel(GL_SMOOTH);
 			break;
 		case 'n':
-<<<<<<< HEAD
             
             if (_light_calculation) {
                 _daylighte = !_daylighte;
@@ -112,10 +107,6 @@ GLvoid GameManager::keyPressed(unsigned char key){
                 else
                     glClearColor(0, 51./255, 102./255, 0);
             }
-=======
-            _daylight = !_daylight;
-            _lightsources[0].switchOn();
->>>>>>> a2a08ce2e115696e6d24f4e1a09decf1887ab658
 			break;
             
         case 'c':
