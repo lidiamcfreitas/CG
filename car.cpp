@@ -55,22 +55,12 @@ GLvoid Car::draw(){
     GLfloat spec[]={0.633f,0.727811f,0.633f,1.0f};
     GLfloat shine=76.8f;
     
-    GLfloat amb_wheel[]={0.02f,0.02f,0.02f,1.0f};
-    GLfloat diff_wheel[]={0.01f,0.01f,0.01f,1.0f};
-    GLfloat spec_wheel[]={0.4f,0.4f,0.4f,1.0f};
-    GLfloat shine_wheel=10.0f;
+    // SHINY WHEELS
+    GLfloat amb_1[]={0.0f,0.0f,0.0f,1.0f};
+    GLfloat diff_1[]={0.11f,0.11f,0.11f,1.0f};
+    GLfloat spec_1[]={0.5f,0.5f,0.5f,1.0f};
+    GLfloat shine_1=10.0f;
 
-    /*
-    GLfloat amb_red[]={0.1745f,0.01175f,0.01175f,1.0f};
-    GLfloat diff_red[]={0.61424f,0.04136f,0.04136f,1.0f};
-    GLfloat spec_red[]={0.727811f,0.626959f,0.626959f,1.0f};
-    GLfloat shine_red=76.8f;
-    
-    GLfloat amb_lights[]={0.05f,0.05f,0.0f,1.0f};
-    GLfloat diff_lights[]={0.5f,0.5f,0.4f,1.0f};
-    GLfloat spec_lights[]={0.7f,0.7f,0.04f,1.0f};
-    GLfloat shine_lights=10.0f;
-     */
     
 	glPushMatrix();
     
@@ -84,573 +74,95 @@ GLvoid Car::draw(){
     material(amb, diff, spec, shine);
     glColor3f(0.0, 0.5, 0.0);//dark green
     
-    //A
-    glBegin(GL_QUADS);
-    glNormal3f(0.527227, 0.613567, 0.587849);
-    glVertex3f(2.5, 0, 4.75);
-    glNormal3f(0.527227, 0.613567, 0.587849);
-    glVertex3f(1.5, 3, 2.3);
-    glNormal3f(-0.527227, 0.613567, 0.587849);
-    glVertex3f(-1.5, 3, 2.3);
-    glNormal3f(-0.527227, 0.613567, 0.587849);
-    glVertex3f(-2.5, 0, 4.75);
-    glEnd();
+    glBegin(GL_QUAD_STRIP);
     
     //B
-    glBegin(GL_QUADS);
-    glNormal3f(-0.527227, 0.613567, 0.587849);
+    glNormal3f(-0.539, 0.5263, 0.65746);
+    glVertex3f(-2.5, -3, 4.75);
+    glNormal3f(0.539, 0.5263, 0.65746);
+    glVertex3f(2.5, -3, 4.75);
+    glNormal3f(-0.696, 0.339, 0.632);
     glVertex3f(-2.5, 0, 4.75);
-    glNormal3f(-0.043353, 0.964619, 0.260121);
-    glVertex3f(-2.5, -3, 4.75);
-    glNormal3f(0.043353, 0.964619, 0.260121);
-    glVertex3f(2.5, -3, 4.75);
-    glNormal3f(0.527227, 0.613567, 0.587849);
+    glNormal3f(0.696, 0.339, 0.632);
     glVertex3f(2.5, 0, 4.75);
-    glEnd();
-    
-    //C
-    glBegin(GL_QUADS);
-    glNormal3f(-0.043353, 0.964619, 0.260121);
-    glVertex3f(-2.5, -3, 4.75);
-    glNormal3f(-0.043802, 0.974594, 0.219010);
-    glVertex3f(-2.5, -4, 0.3);
-    glNormal3f(0.043802, 0.974594, 0.219010);
-    glVertex3f(2.5, -4, 0.3);
-    glNormal3f(0.043353, 0.964619, 0.260121);
-    glVertex3f(2.5, -3, 4.75);
-    glEnd();
-    
+    //A
+    glNormal3f(-0.527227, 0.613567, 0.587849);
+    glVertex3f(-1.5, 3, 2.3);
+    glNormal3f(0.527227, 0.613567, 0.587849);
+    glVertex3f(1.5, 3, 2.3);
     //D
-    glBegin(GL_QUADS);
-    glNormal3f(0.156921, 0.941531, 0.298151);
-    glVertex3f(1.5, 4.7, 2.3);
-    glNormal3f(-0.156921, 0.941531, 0.298151);
+    glNormal3f(-0.55, 0.5448, 0.6325);
     glVertex3f(-1.5, 4.7, 2.3);
-    glNormal3f(-0.527227, 0.613567, 0.587849);
-    glVertex3f(-1.5, 3, 2.3);
-    glNormal3f(0.527227, 0.613567, 0.587849);
-    glVertex3f(1.5, 3, 2.3);
-    glEnd();
-    
+    glNormal3f(0.55, 0.5448, 0.6325);
+    glVertex3f(1.5, 4.7, 2.3);
     //E
-    glBegin(GL_QUADS);
-    glNormal3f(-0.162628, 0.975771, 0.146365);
+    glNormal3f(-0.707, 0.6993, 0.104);
     glVertex3f(-1.5, 5, 0.3);
-    glNormal3f(-0.156921, 0.941531, 0.298151);
-    glVertex3f(-1.5, 4.7, 2.3);
-    glNormal3f(0.156921, 0.1941531, 0.298151);
-    glVertex3f(1.5, 4.7, 2.3);
-    glNormal3f(0.162628, 0.975771, 0.146365);
+    glNormal3f(0.707, 0.6993, 0.104);
     glVertex3f(1.5, 5, 0.3);
+    
     glEnd();
     
-    //F
-    glBegin(GL_QUADS);
+    //SIDES
+    glBegin(GL_QUAD_STRIP);
+    glNormal3f(-0.55, 0.5448, 0.6325);
+    glVertex3f(-1.5, 4.7, 2.3);
+    glNormal3f(-0.707, 0.6993, 0.104);
+    glVertex3f(-1.5, 5, 0.3);
+    
     glNormal3f(-0.527227, 0.613567, 0.587849);
+    glVertex3f(-1.5, 3, 2.3);
+    glNormal3f(-0.987, 0.1571, 0);
+    glVertex3f(-1.5, 3, 0.3);
+    
+    glNormal3f(-0.696, 0.339, 0.632);
     glVertex3f(-2.5, 0, 4.75);
-    glNormal3f(-0.955129, 0.296189, 0);
+    glNormal3f(-0.987, 0.1571, 0);
     glVertex3f(-2.5, 0, 0.3);
-    glNormal3f(-0.043802, 0.974594, 0.219010);
-    glVertex3f(-2.5, -4, 0.3);
-    glNormal3f(-0.043353, 0.964619, 0.260121);
+    
+    glNormal3f(-0.539, 0.5263, 0.65746);
     glVertex3f(-2.5, -3, 4.75);
-    glEnd();
+    glNormal3f(-0.707, 0.690, 0.155);
+    glVertex3f(-2.5, -4, 0.3);
     
-    //H
-    glBegin(GL_QUADS);
-    glNormal3f(-0.527227, 0.613567, 0.587849);
-    glVertex3f(-1.5, 3, 2.3);
-    glNormal3f(-0.955129, 0.296189, 0);
-    glVertex3f(-1.5, 3, 0.3);
-    glNormal3f(-0.955129, 0.296189, 0);
-    glVertex3f(-2.5, 0, 0.3);
-    glNormal3f(-0.527227, 0.613567, 0.587849);
-    glVertex3f(-2.5, 0, 4.75);
-    glEnd();
-    
-    //J
-    glBegin(GL_QUADS);
-    glNormal3f(-0.156921, 0.941531, 0.298158);
-    glVertex3f(-1.5, 4.7, 2.3);
-    glNormal3f(-0.162628, 0.975771, 0.146365);
-    glVertex3f(-1.5, 5, 0.3);
-    glNormal3f(-0.955129, 0.296189, 0);
-    glVertex3f(-1.5, 3, 0.3);
-    glNormal3f(-0.527227, 0.613567, 0.587849);
-    glVertex3f(-1.5, 3, 2.3);
-    glEnd();
-    
-    //G
-    glBegin(GL_QUADS);
-    glNormal3f(0.527227, 0.613567, 0.587849);
-    glVertex3f(2.5, 0, 4.75);
-    glNormal3f(0.955129, 0.296189, 0);
-    glVertex3f(2.5, 0, 0.3);
-    glNormal3f(0.043802, 0.974594, 0.219010);
-    glVertex3f(2.5, -4, 0.3);
-    glNormal3f(0.043353, 0.964619, 0.260121);
+    glNormal3f(0.539, 0.5263, 0.65746);
     glVertex3f(2.5, -3, 4.75);
-    glEnd();
+    glNormal3f(0.707, 0.690, 0.155);
+    glVertex3f(2.5, -4, 0.3);
     
-    //I
-    glBegin(GL_QUADS);
-    glNormal3f(0.527227, 0.613567, 0.587849);
-    glVertex3f(1.5, 3, 2.3);
-    glNormal3f(0.955129, 0.296189, 0);
-    glVertex3f(1.5, 3, 0.3);
-    glNormal3f(0.955129, 0.296189, 0);
-    glVertex3f(2.5, 0, 0.3);
-    glNormal3f(0.527227, 0.613567, 0.587849);
+    
+    glNormal3f(0.696, 0.339, 0.632);
     glVertex3f(2.5, 0, 4.75);
-    glEnd();
+    glNormal3f(0.987, 0.1571, 0);
+    glVertex3f(2.5, 0, 0.3);
     
-    //K
-    glBegin(GL_QUADS);
-    glNormal3f(0.156921, 0.941531, 0.298158);
-    glVertex3f(1.5, 4.7, 2.3);
-    glNormal3f(0.162628, 0.975771, 0.146365);
-    glVertex3f(1.5, 5, 0.3);
-    glNormal3f(0.955129, 0.296189, 0);
-    glVertex3f(1.5, 3, 0.3);
     glNormal3f(0.527227, 0.613567, 0.587849);
     glVertex3f(1.5, 3, 2.3);
+    glNormal3f(0.987, 0.1571, 0);
+    glVertex3f(1.5, 3, 0.3);
+    
+    glNormal3f(0.55, 0.5448, 0.6325);
+    glVertex3f(1.5, 4.7, 2.3);
+    glNormal3f(0.707, 0.6993, 0.104);
+    glVertex3f(1.5, 5, 0.3);
     glEnd();
-
+    
     glPopMatrix();
-    
-    
-    
     
     //wheels
     glPushMatrix();
-    material(amb_wheel, diff_wheel, spec_wheel, shine_wheel);
+    material(amb_1, diff_1, spec_1, shine_1);
     glColor3f(0.26, 0.15, 0.2);//dark grey
     
-    //front left wheel
-    glBegin(GL_QUADS);
-    glNormal3f(-0.64018, 0, 0.7682);
-    glVertex3f(-2.4, 4, 3.464);
-    glNormal3f(-0.561599, -0.755688, 0.3369);
-    glVertex3f(-2.4, 2.5, 2.598075);
-    glNormal3f(0.561599, -0.755688, 0.3369);
-    glVertex3f(-2, 2.5, 2.598075);
-    glNormal3f(0.64018, 0, 0.7682);
-    glVertex3f(-2, 4, 3.464);
-    glEnd();
-    
-    glBegin(GL_QUADS);
-    glNormal3f(-0.561599, -0.755688, 0.3369);
-    glVertex3f(-2.4, 2.5, 2.598075);
-    glNormal3f(-0.561599, -0.755680, -0.3369);
-    glVertex3f(-2.4, 2.5, 0.866025);
-    glNormal3f(0.561599, -0.755680, -0.3369);
-    glVertex3f(-2, 2.5, 0.866025);
-    glNormal3f(0.561599, 0.755688, 0.3369);
-    glVertex3f(-2, 2.5, 2.598075);
-    glEnd();
-    
-    glBegin(GL_QUADS);
-    glNormal3f(-0.561599, -0.755680, -0.3369);
-    glVertex3f(-2.4, 2.5, 0.866025);
-    glNormal3f(-0.64018, 0, -0.7682);
-    glVertex3f(-2.4, 4, 0);
-    glNormal3f(0.64018, 0, -0.7682);
-    glVertex3f(-2, 4, 0);
-    glNormal3f(0.561599, -0.755680, -0.3369);
-    glVertex3f(-2, 2.5, 0.866025);
-    glEnd();
-    
-    glBegin(GL_QUADS);
-    glNormal3f(-0.64018, 0, -0.7682);
-    glVertex3f(-2.4, 4, 0);
-    glNormal3f(-0.561599, 0.755680, -0.3369);
-    glVertex3f(-2.4, 5.5, 0.866025);
-    glNormal3f(0.561599, 0.755680, -0.3369);
-    glVertex3f(-2, 5.5, 0.866023);
-    glNormal3f(0.64018, 0, -0.7682);
-    glVertex3f(-2, 4, 0);
-    glEnd();
-    
-    glBegin(GL_QUADS);
-    glNormal3f(-0.561599, 0.755688, 0.3369);
-    glVertex3f(-2.4, 5.5, 2.598075);
-    glNormal3f(0.561599, 0.755688, 0.3369);
-    glVertex3f(-2, 5.5, 2.598075);
-    glNormal3f(0.561599, 0.755680, -0.3369);
-    glVertex3f(-2, 5.5, 0.866025);
-    glNormal3f(-0.561599, 0.755680, -0.3369);
-    glVertex3f(-2.4, 5.5, 0.866023);
-    glEnd();
-    
-    glBegin(GL_QUADS);
-    glNormal3f(-0.64018, 0, 0.7682);
-    glVertex3f(-2.4, 4, 3.464);
-    glNormal3f(0.64018, 0, 0.7682);
-    glVertex3f(-2, 4, 3.464);
-    glNormal3f(0.6561599, 0.755688, 0.3369);
-    glVertex3f(-2, 5.5, 2.598075);
-    glNormal3f(-0.561599, 0.755688, 0.3369);
-    glVertex3f(-2.4, 5.5, 2.598075);
-    glEnd();
-    
-    glBegin(GL_POLYGON);
-    glNormal3f(-0.64018, 0, 0.7682);
-    glVertex3f(-2.4, 4, 3.464);
-    glNormal3f(-0.561599, 0.755680, -0.3369);
-    glVertex3f(-2.4, 5.5, 2.598075);
-    glNormal3f(-0.561599, 0.755680, -0.3369);
-    glVertex3f(-2.4, 5.5, 0.866024);
-    glNormal3f(-0.64018, 0, -0.7682);
-    glVertex3f(-2.4, 4, 0);
-    glNormal3f(-0.561599, -0.755680, -0.3369);
-    glVertex3f(-2.4, 2.5, 0.866025);
-    glNormal3f(-0.561599, -0.755688, 0.3369);
-    glVertex3f(-2.4, 2.5, 2.598075);
-    glEnd();
-    
-    //front right wheel
-    glBegin(GL_QUADS);
-    glNormal3f(0.64018, 0, 0.7682);
-    glVertex3f(2.4, 4, 3.464);
-    glNormal3f(0.561599, -0.755688, 0.3369);
-    glVertex3f(2.4, 2.5, 2.598075);
-    glNormal3f(-0.561599, -0.755688, 0.3369);
-    glVertex3f(2, 2.5, 2.598075);
-    glNormal3f(-0.64018, 0, 0.7682);
-    glVertex3f(2, 4, 3.464);
-    glEnd();
-    
-    glBegin(GL_QUADS);
-    glNormal3f(0.561599, -0.755688, 0.3369);
-    glVertex3f(2.4, 2.5, 2.598075);
-    glNormal3f(0.561599, -0.755680, -0.3369);
-    glVertex3f(2.4, 2.5, 0.866025);
-    glNormal3f(-0.561599, -0.755680, -0.3369);
-    glVertex3f(2, 2.5, 0.866025);
-    glNormal3f(-0.561599, 0.755688, 0.3369);
-    glVertex3f(2, 2.5, 2.598075);
-    glEnd();
-    
-    glBegin(GL_QUADS);
-    glNormal3f(0.561599, -0.755680, -0.3369);
-    glVertex3f(2.4, 2.5, 0.866025);
-    glNormal3f(0.64018, 0, -0.7682);
-    glVertex3f(2.4, 4, 0);
-    glNormal3f(-0.64018, 0, -0.7682);
-    glVertex3f(2, 4, 0);
-    glNormal3f(-0.561599, -0.755680, -0.3369);
-    glVertex3f(2, 2.5, 0.866025);
-    glEnd();
-    
-    glBegin(GL_QUADS);
-    glNormal3f(0.64018, 0, -0.7682);
-    glVertex3f(2.4, 4, 0);
-    glNormal3f(0.561599, 0.755680, -0.3369);
-    glVertex3f(2.4, 5.5, 0.866025);
-    glNormal3f(-0.561599, 0.755680, -0.3369);
-    glVertex3f(2, 5.5, 0.866023);
-    glNormal3f(-0.64018, 0, -0.7682);
-    glVertex3f(2, 4, 0);
-    glEnd();
-    
-    glBegin(GL_QUADS);
-    glNormal3f(0.561599, 0.755688, 0.3369);
-    glVertex3f(2.4, 5.5, 2.598075);
-    glNormal3f(-0.561599, 0.755688, 0.3369);
-    glVertex3f(2, 5.5, 2.598075);
-    glNormal3f(-0.561599, 0.755680, -0.3369);
-    glVertex3f(2, 5.5, 0.866025);
-    glNormal3f(0.561599, 0.755680, -0.3369);
-    glVertex3f(2.4, 5.5, 0.866023);
-    glEnd();
-    
-    glBegin(GL_QUADS);
-    glNormal3f(0.64018, 0, 0.7682);
-    glVertex3f(2.4, 4, 3.464);
-    glNormal3f(-0.64018, 0, 0.7682);
-    glVertex3f(2, 4, 3.464);
-    glNormal3f(-0.6561599, 0.755688, 0.3369);
-    glVertex3f(2, 5.5, 2.598075);
-    glNormal3f(0.561599, 0.755688, 0.3369);
-    glVertex3f(2.4, 5.5, 2.598075);
-    glEnd();
-    
-    glBegin(GL_POLYGON);
-    glNormal3f(0.64018, 0, 0.7682);
-    glVertex3f(2.4, 4, 3.464);
-    glNormal3f(0.561599, 0.755680, -0.3369);
-    glVertex3f(2.4, 5.5, 2.598075);
-    glNormal3f(0.561599, 0.755680, -0.3369);
-    glVertex3f(2.4, 5.5, 0.866024);
-    glNormal3f(0.64018, 0, -0.7682);
-    glVertex3f(2.4, 4, 0);
-    glNormal3f(0.561599, -0.755680, -0.3369);
-    glVertex3f(2.4, 2.5, 0.866025);
-    glNormal3f(0.561599, -0.755688, 0.3369);
-    glVertex3f(2.4, 2.5, 2.598075);
-    glEnd();
-
-    //back left wheel
-    glBegin(GL_QUADS);
-    glNormal3f(-0.64018, 0, 0.7682);
-    glVertex3f(-3.6, -2.15, 4.9652);
-    glNormal3f(-0.561599, -0.755688, 0.3369);
-    glVertex3f(-3.6, -4.3, 3.7239);
-    glNormal3f(0.561599, -0.755688, 0.3369);
-    glVertex3f(-2.6, -4.3, 3.7239);
-    glNormal3f(0.64018, 0, 0.7682);
-    glVertex3f(-2.6, -2.15, 4.9652);
-    glEnd();
-    
-    glBegin(GL_QUADS);
-    glNormal3f(-0.561599, -0.755688, 0.3369);
-    glVertex3f(-3.6, -4.3, 3.7239);
-    glNormal3f(-0.561599, -0.755680, -0.3369);
-    glVertex3f(-3.6, -4.3, 1.2413);
-    glNormal3f(0.561599, -0.755680, -0.3369);
-    glVertex3f(-2.6, -4.3, 1.2413);
-    glNormal3f(0.561599, 0.755688, 0.3369);
-    glVertex3f(-2.6, -4.3, 3.7239);
-    glEnd();
-    
-    glBegin(GL_QUADS);
-    glNormal3f(-0.561599, -0.755680, -0.3369);
-    glVertex3f(-3.6, -4.3, 1.2413);
-    glNormal3f(-0.64018, 0, -0.7682);
-    glVertex3f(-3.6, -2.15, 0);
-    glNormal3f(0.64018, 0, -0.7682);
-    glVertex3f(-2.6, -2.15, 0);
-    glNormal3f(0.561599, -0.755680, -0.3369);
-    glVertex3f(-2.6, -4.3, 1.2413);
-    glEnd();
-    
-    glBegin(GL_QUADS);
-    glNormal3f(-0.64018, 0, -0.7682);
-    glVertex3f(-3.6, -2.15, 0);
-    glNormal3f(-0.561599, 0.755680, -0.3369);
-    glVertex3f(-3.6, 0, 1.2413);
-    glNormal3f(0.561599, 0.755680, -0.3369);
-    glVertex3f(-2.6, 0, 1.2413);
-    glNormal3f(0.64018, 0, -0.7682);
-    glVertex3f(-2.6, -2.15, 0);
-    glEnd();
-    
-    glBegin(GL_QUADS);
-    glNormal3f(-0.561599, 0.755688, 0.3369);
-    glVertex3f(-3.6, 0, 3.7239);
-    glNormal3f(0.561599, 0.755688, 0.3369);
-    glVertex3f(-2.6, 0, 3.7239);
-    glNormal3f(0.561599, 0.755680, -0.3369);
-    glVertex3f(-2.6, 0, 1.2413);
-    glNormal3f(-0.561599, 0.755680, -0.3369);
-    glVertex3f(-3.6, 0, 1.2413);
-    glEnd();
-    
-    glBegin(GL_QUADS);
-    glNormal3f(-0.64018, 0, 0.7682);
-    glVertex3f(-3.6, -2.15, 4.9652);
-    glNormal3f(0.64018, 0, 0.7682);
-    glVertex3f(-2.6, -2.15, 4.9652);
-    glNormal3f(0.6561599, 0.755688, 0.3369);
-    glVertex3f(-2.6, 0, 3.7239);
-    glNormal3f(-0.561599, 0.755688, 0.3369);
-    glVertex3f(-3.6, 0, 3.7239);
-    glEnd();
-
-    glBegin(GL_POLYGON);
-    glNormal3f(-0.64018, 0, 0.7682);
-    glVertex3f(-3.6, -2.15, 4.9652);
-    glNormal3f(-0.561599, 0.755680, -0.3369);
-    glVertex3f(-3.6, -4.3, 3.7239);
-    glNormal3f(-0.561599, 0.755680, -0.3369);
-    glVertex3f(-3.6, -4.3, 1.2413);
-    glNormal3f(-0.64018, 0, -0.7682);
-    glVertex3f(-3.6, -2.15, 0);
-    glNormal3f(-0.561599, -0.755680, -0.3369);
-    glVertex3f(-3.6, 0, 1.2413);
-    glNormal3f(-0.561599, -0.755688, 0.3369);
-    glVertex3f(-3.6, 0, 3.7239);
-    glEnd();
-    
-    
-    //back right wheel
-    glBegin(GL_QUADS);
-    glNormal3f(0.64018, 0, 0.7682);
-    glVertex3f(3.6, -2.15, 4.9652);
-    glNormal3f(0.561599, -0.755688, 0.3369);
-    glVertex3f(3.6, -4.3, 3.7239);
-    glNormal3f(-0.561599, -0.755688, 0.3369);
-    glVertex3f(2.6, -4.3, 3.7239);
-    glNormal3f(-0.64018, 0, 0.7682);
-    glVertex3f(2.6, -2.15, 4.9652);
-    glEnd();
-    
-    glBegin(GL_QUADS);
-    glNormal3f(0.561599, -0.755688, 0.3369);
-    glVertex3f(3.6, -4.3, 3.7239);
-    glNormal3f(0.561599, -0.755680, -0.3369);
-    glVertex3f(3.6, -4.3, 1.2413);
-    glNormal3f(-0.561599, -0.755680, -0.3369);
-    glVertex3f(2.6, -4.3, 1.2413);
-    glNormal3f(-0.561599, 0.755688, 0.3369);
-    glVertex3f(2.6, -4.3, 3.7239);
-    glEnd();
-    
-    glBegin(GL_QUADS);
-    glNormal3f(0.561599, -0.755680, -0.3369);
-    glVertex3f(3.6, -4.3, 1.2413);
-    glNormal3f(0.64018, 0, -0.7682);
-    glVertex3f(3.6, -2.15, 0);
-    glNormal3f(-0.64018, 0, -0.7682);
-    glVertex3f(2.6, -2.15, 0);
-    glNormal3f(-0.561599, -0.755680, -0.3369);
-    glVertex3f(2.6, -4.3, 1.2413);
-    glEnd();
-    
-    glBegin(GL_QUADS);
-    glNormal3f(0.64018, 0, -0.7682);
-    glVertex3f(3.6, -2.15, 0);
-    glNormal3f(0.561599, 0.755680, -0.3369);
-    glVertex3f(3.6, 0, 1.2413);
-    glNormal3f(-0.561599, 0.755680, -0.3369);
-    glVertex3f(2.6, 0, 1.2413);
-    glNormal3f(-0.64018, 0, -0.7682);
-    glVertex3f(2.6, -2.15, 0);
-    glEnd();
-    
-    glBegin(GL_QUADS);
-    glNormal3f(0.561599, 0.755688, 0.3369);
-    glVertex3f(3.6, 0, 3.7239);
-    glNormal3f(-0.561599, 0.755688, 0.3369);
-    glVertex3f(2.6, 0, 3.7239);
-    glNormal3f(-0.561599, 0.755680, -0.3369);
-    glVertex3f(2.6, 0, 1.2413);
-    glNormal3f(0.561599, 0.755680, -0.3369);
-    glVertex3f(3.6, 0, 1.2413);
-    glEnd();
-    
-    glBegin(GL_QUADS);
-    glNormal3f(0.64018, 0, 0.7682);
-    glVertex3f(3.6, -2.15, 4.9652);
-    glNormal3f(-0.64018, 0, 0.7682);
-    glVertex3f(2.6, -2.15, 4.9652);
-    glNormal3f(-0.6561599, 0.755688, 0.3369);
-    glVertex3f(2.6, 0, 3.7239);
-    glNormal3f(0.561599, 0.755688, 0.3369);
-    glVertex3f(3.6, 0, 3.7239);
-    glEnd();
-    
-    glBegin(GL_POLYGON);
-    glNormal3f(0.64018, 0, 0.7682);
-    glVertex3f(3.6, -2.15, 4.9652);
-    glNormal3f(0.561599, 0.755680, -0.3369);
-    glVertex3f(3.6, -4.3, 3.7239);
-    glNormal3f(0.561599, 0.755680, -0.3369);
-    glVertex3f(3.6, -4.3, 1.2413);
-    glNormal3f(0.64018, 0, -0.7682);
-    glVertex3f(3.6, -2.15, 0);
-    glNormal3f(0.561599, -0.755680, -0.3369);
-    glVertex3f(3.6, 0, 1.2413);
-    glNormal3f(0.561599, -0.755688, 0.3369);
-    glVertex3f(3.6, 0, 3.7239);
-    glEnd();
-    
+    drawWheel(0.5, 1.782, 2.2, 4);
+    drawWheel(0.5, 1.782, -2.2, 4);
+    drawWheel(1, 2.4826, 3.1, -2.15);
+    drawWheel(1, 2.4826, -3.1, -2.15);
     
     
     glPopMatrix();
     
     glPopMatrix();
-    
-    /*
-    //---------------------------------------main body
-    glColor3f(0.0, 0.5, 0.0);//dark green
-	glPushMatrix();
-    material(amb, diff, spec, shine);
-    glTranslatef(0.0, 0.0, 3.0);
-    glScalef(1.0f, 1.2f, 0.7f);
-    
-    if(solidOrWire)
-        glutSolidCube(5);
-    else
-        glutWireCube(5);
-    
-	glPopMatrix();
-
-    //---------------------------------------front body
-    glColor3f(0.0, 0.5, 0.0);//dark green
-	glPushMatrix();
-    material(amb, diff, spec, shine);
-    glTranslatef(0.0, 4.0, 1.3f);
-    glScalef(1.5f, 1.0f, 1.0f);
-    if(solidOrWire) {
-        glutSolidCube(2);
-    }
-    else{
-        glutWireCube(2);
-    }
-	glPopMatrix();
-
-    //---------------------------------------back body
-    glColor3f(0.0,  0.5, 0.0);//dark green
-	glPushMatrix();
-    material(amb, diff, spec, shine);
-    glTranslatef(0.0, 3.5, 2.1);
-    glScalef(3.0f, 1.0f, 3.5f);
-    if(solidOrWire){
-        glutSolidCube(1);
-    }
-    else{
-        glutWireCube(1);
-    }
-	glPopMatrix();
-
-    //--------------------------------------front axis
-    glColor3f(0.7, 0.0, 0.0);//red
-    glPushMatrix();
-    material(amb_red, diff_red, spec_red, shine_red);
-    glTranslatef(0.0, 4.5, 1.5f);
-    glScalef(26.0f, 1.0f, 1.0f);
-    if(solidOrWire){
-        glutSolidCube(0.25);
-    }
-    else{
-        glutWireCube(0.25);
-    }
-    glPopMatrix();
-    
-    //--------------------------------------lights
-    glColor3f(1, 1, 0.0);//yellow
-    glPushMatrix();
-    material(amb_lights, diff_lights, spec_lights, shine_lights);
-    glTranslatef(0.0, 5, 1.5f);
-    GLfloat emiss[]={_lights_mat_emiss.getX(),_lights_mat_emiss.getY(),_lights_mat_emiss.getZ(),_lights_mat_emiss.getW()};
-    glMaterialfv(GL_FRONT, GL_EMISSION, emiss);
-    glPushMatrix();
-    glTranslatef(1, 0, 0);
-    if(solidOrWire)
-        glutSolidCube(1);
-    else
-        glutWireCube(1);
-    glPopMatrix();
-    
-    glPushMatrix();
-    glTranslatef(-1, 0, 0);
-    if(solidOrWire)
-        glutSolidCube(1);
-    else
-        glutWireCube(1);
-    glPopMatrix();
-    
-    glPopMatrix();
-    
-    drawWheel(2.7, 4.5, 1.6, 0.6, 1.0, solidOrWire);//front right wheel
-    drawWheel(-2.7, 4.5, 1.6, 0.6, 1.0, solidOrWire);//front left wheel
-    drawWheel(3.0, -3.0, 3.2, 1.2, 2.0, solidOrWire);//back right wheel
-    drawWheel(-3.0, -3.0, 3.2, 1.2, 2.0, solidOrWire);//back left wheel
-
-    glPopMatrix();
-    
-    glPopMatrix();*/
 }
 
 GLvoid Car::drawWheel(GLfloat wheelx, GLfloat wheely, GLfloat wheelz, GLfloat wheelInner, GLfloat wheelOuter, GLboolean solidOrWire){
@@ -730,3 +242,169 @@ GLvoid Car::update(GLdouble delta_t){
         setSpeed(0, 1, 0);
     }
 }
+
+GLvoid Car::drawWheel(GLfloat wheelWidth, GLfloat radius, GLfloat x, GLfloat y){
+    glPushMatrix();
+    glTranslatef(x, y, radius);
+    glBegin(GL_TRIANGLE_STRIP);
+    GLfloat degree = 16;
+    
+    std::vector<Vector3> leftVertices;
+    std::vector<Vector3> leftNormals;
+    std::vector<Vector3> rightVertices;
+    std::vector<Vector3> rightNormals;
+    Vector3 vector;
+    Vector3 normal;
+    
+    // SIDE STRIP
+    for (GLint i=0; i<degree+1; i++) {
+        GLfloat angle = (2*M_PI/degree)*i;
+        
+        vector.set(wheelWidth/2, radius * cosf(angle), radius * sinf(angle));
+        normal.set(vector.getX()/vector.norm(),vector.getY()/vector.norm(),vector.getZ()/vector.norm());
+        leftVertices.push_back(vector);
+        leftNormals.push_back(normal);
+        glNormal3f(normal.getX(), normal.getY(), normal.getZ());
+        glVertex3f(wheelWidth/2, radius * cosf(angle), radius * sinf(angle));
+        
+        vector.set(-1*wheelWidth/2, radius * cosf(angle), radius * sinf(angle));
+        normal.set(vector.getX()/vector.norm(),vector.getY()/vector.norm(),vector.getZ()/vector.norm());
+        rightVertices.push_back(vector);
+        rightNormals.push_back(normal);
+        glNormal3f(normal.getX(), normal.getY(), normal.getZ());
+        glVertex3f(-1*wheelWidth/2, radius * cosf(angle), radius * sinf(angle));
+    }
+    glEnd();
+    
+    // RIGHT COVER
+    glBegin(GL_POLYGON);
+    for (GLint i=0; i<leftVertices.size(); i++) {
+        
+        glNormal3f(leftNormals[i].getX(), leftNormals[i].getY(), leftNormals[i].getZ());
+        glVertex3f(leftVertices[i].getX(), leftVertices[i].getY(), leftVertices[i].getZ());
+    }
+    glEnd();
+    
+    // LEFT COVER
+    glBegin(GL_POLYGON);
+    for (GLint i=0; i<leftVertices.size(); i++) {
+        
+        glNormal3f(rightNormals[i].getX(), rightNormals[i].getY(), rightNormals[i].getZ());
+        glVertex3f(rightVertices[i].getX(), rightVertices[i].getY(), rightVertices[i].getZ());
+    }
+    glEnd();
+    glPopMatrix();
+}
+
+
+// OTHER STUFF
+
+/* RUBBER WHEELS
+ GLfloat amb_wheel[]={0.02f,0.02f,0.02f,1.0f};
+ GLfloat diff_wheel[]={0.01f,0.01f,0.01f,1.0f};
+ GLfloat spec_wheel[]={0.4f,0.4f,0.4f,1.0f};
+ GLfloat shine_wheel=10.0f;
+ */
+
+//CARRO FOFO!
+/*
+ GLfloat amb_red[]={0.1745f,0.01175f,0.01175f,1.0f};
+ GLfloat diff_red[]={0.61424f,0.04136f,0.04136f,1.0f};
+ GLfloat spec_red[]={0.727811f,0.626959f,0.626959f,1.0f};
+ GLfloat shine_red=76.8f;
+ 
+ GLfloat amb_lights[]={0.05f,0.05f,0.0f,1.0f};
+ GLfloat diff_lights[]={0.5f,0.5f,0.4f,1.0f};
+ GLfloat spec_lights[]={0.7f,0.7f,0.04f,1.0f};
+ GLfloat shine_lights=10.0f;
+ 
+ //---------------------------------------main body
+ glColor3f(0.0, 0.5, 0.0);//dark green
+	glPushMatrix();
+ material(amb, diff, spec, shine);
+ glTranslatef(0.0, 0.0, 3.0);
+ glScalef(1.0f, 1.2f, 0.7f);
+ 
+ if(solidOrWire)
+ glutSolidCube(5);
+ else
+ glutWireCube(5);
+ 
+	glPopMatrix();
+ 
+ //---------------------------------------front body
+ glColor3f(0.0, 0.5, 0.0);//dark green
+	glPushMatrix();
+ material(amb, diff, spec, shine);
+ glTranslatef(0.0, 4.0, 1.3f);
+ glScalef(1.5f, 1.0f, 1.0f);
+ if(solidOrWire) {
+ glutSolidCube(2);
+ }
+ else{
+ glutWireCube(2);
+ }
+	glPopMatrix();
+ 
+ //---------------------------------------back body
+ glColor3f(0.0,  0.5, 0.0);//dark green
+	glPushMatrix();
+ material(amb, diff, spec, shine);
+ glTranslatef(0.0, 3.5, 2.1);
+ glScalef(3.0f, 1.0f, 3.5f);
+ if(solidOrWire){
+ glutSolidCube(1);
+ }
+ else{
+ glutWireCube(1);
+ }
+	glPopMatrix();
+ 
+ //--------------------------------------front axis
+ glColor3f(0.7, 0.0, 0.0);//red
+ glPushMatrix();
+ material(amb_red, diff_red, spec_red, shine_red);
+ glTranslatef(0.0, 4.5, 1.5f);
+ glScalef(26.0f, 1.0f, 1.0f);
+ if(solidOrWire){
+ glutSolidCube(0.25);
+ }
+ else{
+ glutWireCube(0.25);
+ }
+ glPopMatrix();
+ 
+ //--------------------------------------lights
+ glColor3f(1, 1, 0.0);//yellow
+ glPushMatrix();
+ material(amb_lights, diff_lights, spec_lights, shine_lights);
+ glTranslatef(0.0, 5, 1.5f);
+ GLfloat emiss[]={_lights_mat_emiss.getX(),_lights_mat_emiss.getY(),_lights_mat_emiss.getZ(),_lights_mat_emiss.getW()};
+ glMaterialfv(GL_FRONT, GL_EMISSION, emiss);
+ glPushMatrix();
+ glTranslatef(1, 0, 0);
+ if(solidOrWire)
+ glutSolidCube(1);
+ else
+ glutWireCube(1);
+ glPopMatrix();
+ 
+ glPushMatrix();
+ glTranslatef(-1, 0, 0);
+ if(solidOrWire)
+ glutSolidCube(1);
+ else
+ glutWireCube(1);
+ glPopMatrix();
+ 
+ glPopMatrix();
+ 
+ drawWheel(2.7, 4.5, 1.6, 0.6, 1.0, solidOrWire);//front right wheel
+ drawWheel(-2.7, 4.5, 1.6, 0.6, 1.0, solidOrWire);//front left wheel
+ drawWheel(3.0, -3.0, 3.2, 1.2, 2.0, solidOrWire);//back right wheel
+ drawWheel(-3.0, -3.0, 3.2, 1.2, 2.0, solidOrWire);//back left wheel
+ 
+ glPopMatrix();
+ 
+ glPopMatrix();*/
+

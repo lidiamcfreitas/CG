@@ -1,6 +1,7 @@
 #pragma once
 #include "dynamicobject.h"
 #include "vector4.h"
+#include "math.h"
 
 class Car : public DynamicObject{
 private:
@@ -16,6 +17,7 @@ public:
 	~Car();
 	virtual GLvoid draw();
     virtual GLvoid drawWheel(GLfloat wheelx, GLfloat wheely, GLfloat wheelz, GLfloat wheelInner, GLfloat wheelOuter, GLboolean sw);
+    virtual GLvoid drawWheel(GLfloat wheelWidth, GLfloat radius, GLfloat x, GLfloat y);
     GLvoid update(GLdouble delta_t);
     GLboolean getKeyUp();
     GLboolean getKeyDown();

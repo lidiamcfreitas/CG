@@ -20,7 +20,6 @@ GLvoid Table::draw(){
     
     glPushMatrix();
     
-    
     //start line
     glPushMatrix();
     glColor3f(1, 0, 0);
@@ -46,7 +45,17 @@ GLvoid Table::draw(){
     material(amb, diff, spec, shine);
     glTranslatef(0.0, 0.0, 0.11);
     glRotatef(90, 0, 1, 0);
-    glutSolidSphere(ROAD_OUT_RADIUS - ROAD_WIDTH, 2, 16);
+    
+    glBegin(GL_POLYGON);
+    GLfloat degree = 25;
+    GLfloat radius = ROAD_OUT_RADIUS - ROAD_WIDTH;
+    glNormal3f(0,0, 1);
+
+    for (GLint i=0; i<degree+1; i++) {
+        GLfloat angle = (2*M_PI/degree)*i;
+        glVertex3f(0,radius * cosf(angle), radius * sinf(angle));
+    }
+    glEnd();
     glPopMatrix();
     
     //outter table ring
@@ -55,7 +64,17 @@ GLvoid Table::draw(){
     material(amb_obsidian, diff_obsidian, spec_obsidian, shine_obsidian);
     glTranslatef(0.0, 0.0, 0.1);
     glRotatef(90, 0, 1, 0);
-    glutSolidSphere(ROAD_OUT_RADIUS, 2, 16);
+    
+    glBegin(GL_POLYGON);
+    degree = 25;
+    radius = ROAD_OUT_RADIUS;
+    glNormal3f(0,0, 1);
+    
+    for (GLint i=0; i<degree+1; i++) {
+        GLfloat angle = (2*M_PI/degree)*i;
+        glVertex3f(0,radius * cosf(angle), radius * sinf(angle));
+    }
+    glEnd();
     glPopMatrix();
     
     glPopMatrix();

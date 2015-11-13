@@ -2,7 +2,7 @@
 
 Pointlight::Pointlight(GLdouble x, GLdouble y, GLdouble z) {
     setPosition(x, y, z);
-    _mat_emiss.set(0.5, 0.5, 0.5, 0);
+    _mat_emiss.set(0, 0, 0, 1);
 }
 
 Pointlight::~Pointlight(){}
