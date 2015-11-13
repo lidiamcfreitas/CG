@@ -40,6 +40,10 @@ GLvoid Lightsource::draw(){
 
 GLvoid Lightsource::update(Car car){
     setPosition(car.getPositionX()+1, car.getPositionY()+5, car.getPositionZ()+1.5);
+<<<<<<< HEAD
+=======
+    //printf("%f %f %f\n", car.getPositionX(), car.getPositionY(), car.getPositionZ());
+>>>>>>> a2a08ce2e115696e6d24f4e1a09decf1887ab658
 }
 
 GLvoid Lightsource::setDirection(GLdouble x, GLdouble y, GLdouble z){
