@@ -45,7 +45,7 @@ GLvoid Lightsource::draw(){
 
 GLvoid Lightsource::update(Car car){
     setPosition(car.getPositionX()+1, car.getPositionY()+5, car.getPositionZ()+1.5);
-    printf("%f %f %f\n", car.getPositionX(), car.getPositionY(), car.getPositionZ());
+    //printf("%f %f %f\n", car.getPositionX(), car.getPositionY(), car.getPositionZ());
 }
 
 GLvoid Lightsource::setDirection(GLdouble x, GLdouble y, GLdouble z){

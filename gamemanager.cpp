@@ -177,7 +177,7 @@ GLvoid GameManager::changedCamera(){
 GLvoid GameManager::update(GLdouble delta_t){
     
     if (_car.getLives()<=0) {
-        _itsOver = true;
+        //_itsOver = true;
     }
     
     //update positions
