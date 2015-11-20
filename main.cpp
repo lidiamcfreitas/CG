@@ -45,14 +45,18 @@ GLvoid specialKeysUp( int key, int x, int y ) {
         gamemanager.setKeyDown(false);
 }
 GLvoid GameControl(unsigned char key, int x, int y){
-    
-    if (key=='r') {
-        gamemanager = GameManager();
-        gamemanager.init();
-    } else if (key=='p') {
-        paused = !paused;
-    }
-	gamemanager.keyPressed(key);
+	switch (key){
+	case 'r':
+		gamemanager = GameManager();
+		gamemanager.init();
+		break;
+	case 's':
+		paused = !paused;
+		break;
+	}
+	if (!paused){
+		gamemanager.keyPressed(key);
+	}
 }
 
 GLvoid display()
@@ -76,7 +80,6 @@ GLvoid timer(int value)
         if (gamemanager.itsOver()){
             gamemanager = GameManager();
             gamemanager.init();
-            paused = !paused;
         }
     }
     

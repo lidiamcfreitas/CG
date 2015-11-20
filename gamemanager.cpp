@@ -28,19 +28,19 @@ GLvoid GameManager::setKeyLeft(GLboolean value){ _car.setKeyLeft(value); }
 GLvoid GameManager::keyPressed(unsigned char key){
     switch (key){
         // EXTRA - ROTACAO
-        case 'e':
+        case 'u':
             rotate_x += 5;
             printf("rotate %f, %f\n", rotate_x, rotate_y);
             break;
-        case 'd':
+        case 'j':
             rotate_x -= 5;
             printf("rotate %f, %f\n", rotate_x, rotate_y);
             break;
-        case 's':
+        case 'h':
             rotate_y += 5;
             printf("rotate %f, %f\n", rotate_x, rotate_y);
             break;
-        case 'f':
+        case 'k':
             rotate_y -= 5;
             printf("rotate %f, %f\n", rotate_x, rotate_y);
             break;
@@ -76,7 +76,7 @@ GLvoid GameManager::keyPressed(unsigned char key){
 
             if (!_light_calculation && _daylighte){
                 _lightsources[0].setOn(false);
-                _daylighte = !daylight;
+                _daylighte = !_daylighte;
             }
             
             for (int i=0; i<NUM_ORANGES;i++){ // To remove artificial shadow when calculation is on
@@ -196,7 +196,7 @@ GLvoid GameManager::changedCamera(){
 GLvoid GameManager::update(GLdouble delta_t){
     
     if (_car.getLives()<=0) {
-        //_itsOver = true;
+        _itsOver = true;
     }
     
     //update positions
