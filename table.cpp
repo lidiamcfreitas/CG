@@ -29,27 +29,28 @@ GLvoid Table::draw(){
     glutSolidCube(1);
     glPopMatrix();
     
-    //table
+   //table
     glColor3f(0.6, 0.6, 0.6); // glColor3f(0.7, 0.7, 0.7);
     glPushMatrix();
     material(amb, diff, spec, shine);
     glTranslatef( 0.0f, 0.0f, -20.);
-    
     glScalef(1, 1, 40./TABLE_SIZE);
     glutSolidCube(TABLE_SIZE);
     glPopMatrix();
     
     //inner table circle
-    glPushMatrix();
+	/*comentei esta parte porque por alguma razao isto metia as luzes do carro completamente 
+	estupidas n consegui entender porque acho que tem a haver com as normais*/
+   /*glPushMatrix();
     glColor3f(0.6, 0.6, 0.6); // glColor3f(0.7, 0.7, 0.7);
     material(amb, diff, spec, shine);
+    glNormal3f(0,0, 1);
     glTranslatef(0.0, 0.0, 0.11);
     glRotatef(90, 0, 1, 0);
     
     glBegin(GL_POLYGON);
     GLfloat degree = 25;
     GLfloat radius = ROAD_OUT_RADIUS - ROAD_WIDTH;
-    glNormal3f(0,0, 1);
 
     for (GLint i=0; i<degree+1; i++) {
         GLfloat angle = (2*M_PI/degree)*i;
@@ -62,20 +63,20 @@ GLvoid Table::draw(){
     glPushMatrix();
     glColor3f(0.428, 0.428, 0.428); // glColor3f(0.7, 0.7, 0.7);
     material(amb_obsidian, diff_obsidian, spec_obsidian, shine_obsidian);
+    glNormal3f(0,0, 1);
     glTranslatef(0.0, 0.0, 0.1);
     glRotatef(90, 0, 1, 0);
     
     glBegin(GL_POLYGON);
     degree = 25;
     radius = ROAD_OUT_RADIUS;
-    glNormal3f(0,0, 1);
     
     for (GLint i=0; i<degree+1; i++) {
         GLfloat angle = (2*M_PI/degree)*i;
         glVertex3f(0,radius * cosf(angle), radius * sinf(angle));
     }
     glEnd();
-    glPopMatrix();
+    glPopMatrix();*/
     
     glPopMatrix();
 }

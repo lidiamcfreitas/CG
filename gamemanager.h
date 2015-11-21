@@ -15,6 +15,7 @@
 #include "orthocamera.h"
 #include "perspectivecamera.h"
 #include "movperspectivecamera.h"
+#include "carlives.h"
 
 
 class GameManager{
@@ -32,7 +33,6 @@ private:
     
 	std::vector<std::shared_ptr<Camera>> _cameras;
 	int _currentCamera;
-    /* TODO missing light_sources */
     
     GLboolean   _solidOrWire;
     GLdouble    rotate_y;
@@ -41,6 +41,8 @@ private:
     GLboolean   _daylighte;
     GLboolean   _itsOver;
 	GLboolean	_shadingRegular;
+	Carlives	_carLives;
+
 public:
     GameManager();
     ~GameManager();

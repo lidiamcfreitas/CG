@@ -39,7 +39,9 @@ GLvoid Lightsource::draw(){
 }
 
 GLvoid Lightsource::update(Car car){
-    setPosition(car.getPositionX()+1, car.getPositionY()+5, car.getPositionZ()+1.5);
+	Vector3 direction = Vector3(cos(car.getAngle()*M_PI / 180), sin(car.getAngle()*M_PI / 180), 0);
+	_direction.set(direction.getX() / direction.norm(), direction.getY() / direction.norm(), 0);
+	setPosition(_direction.getX()*3 + car.getPositionX(),_direction.getY()*3 + car.getPositionY(), .5);
 }
 
 GLvoid Lightsource::setDirection(GLdouble x, GLdouble y, GLdouble z){

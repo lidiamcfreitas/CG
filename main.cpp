@@ -117,7 +117,6 @@ int main(int argc, char **argv)
     glutKeyboardFunc(GameControl);
     
 	glutReshapeFunc(reshape);
-    //glClearColor( 1., 1., 1., 0.);
     glClearColor( 65./255, 105./255, 1., 0.);
 	glutTimerFunc(10, timer, 0);
     glutTimerFunc(10000, main_levelUp, 0);

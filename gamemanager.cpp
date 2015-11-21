@@ -28,19 +28,19 @@ GLvoid GameManager::setKeyLeft(GLboolean value){ _car.setKeyLeft(value); }
 GLvoid GameManager::keyPressed(unsigned char key){
     switch (key){
         // EXTRA - ROTACAO
-        case 'u':
+        case 'i':
             rotate_x += 5;
             printf("rotate %f, %f\n", rotate_x, rotate_y);
             break;
-        case 'j':
+        case 'k':
             rotate_x -= 5;
             printf("rotate %f, %f\n", rotate_x, rotate_y);
             break;
-        case 'h':
+        case 'p':
             rotate_y += 5;
             printf("rotate %f, %f\n", rotate_x, rotate_y);
             break;
-        case 'k':
+        case 'j':
             rotate_y -= 5;
             printf("rotate %f, %f\n", rotate_x, rotate_y);
             break;
@@ -69,7 +69,11 @@ GLvoid GameManager::keyPressed(unsigned char key){
         case 'a':
             changeSolidOrWire(); //flip boolean
             break;
-            
+		
+		case 'h':
+			_lightsources[7].switchOn();
+			break;
+
 		case 'l':
 			_light_calculation = !_light_calculation;
 			lightCalculationChanged();
@@ -115,7 +119,6 @@ GLvoid GameManager::keyPressed(unsigned char key){
             for (int i = 1; i < _lightsources.size()-1; i++){  
                 _lightsources[i].switchOn();              // without lightsource 0
 				
-                //if(_pointlights[i-1].getEmissionX()==0)
                 if(_lightsources[i].getOn())
                     emiss.set(0.5, 0.5, 0.5, 0.0);
                 else
@@ -175,6 +178,8 @@ GLvoid GameManager::display(GLboolean solidOrWire) {
     for (int i = 0; i < _pointlights.size(); i++)
         _pointlights[i].draw();
     
+	_carLives.draw();
+
     glFlush();
     glutSwapBuffers(); /* TIRAR */
     
@@ -195,7 +200,7 @@ GLvoid GameManager::changedCamera(){
 
 GLvoid GameManager::update(GLdouble delta_t){
     
-    if (_car.getLives()<=0) {
+    if (_carLives.getLives()<=0) {
         _itsOver = true;
     }
     
@@ -216,9 +221,8 @@ GLvoid GameManager::update(GLdouble delta_t){
 	//update current camera
 	_cameras[_currentCamera]->update(_car.getPosition(), _car.getAngle());
     
-    //update lightsource
+    //update carlight
     _lightsources[7].update(_car);
-    //_lightsources[8].update(_car);
     
     //collisions
     
@@ -227,6 +231,7 @@ GLvoid GameManager::update(GLdouble delta_t){
         if(detectCollision(_car, _oranges[i], direction)){
             //printf("collision detected with oranges\n");
             _car.reset();
+			_carLives.downOne();
             break;
         }
     }
@@ -283,7 +288,12 @@ GLvoid GameManager::update(GLdouble delta_t){
             _car.crash();
         }
     }
-    
+
+	if (_car.getCarFell()){
+		_carLives.downOne();
+		_car.changeCarFell();
+	}
+
 }
 
 GLboolean GameManager::detectCollision(DynamicObject &obj1, DynamicObject &obj2, Vector3 &direction_v){
@@ -297,14 +307,14 @@ GLboolean GameManager::detectCollision(DynamicObject &obj1, DynamicObject &obj2,
 
 GLvoid GameManager::init(){
 	glShadeModel(GL_FLAT);
-	//Lighting set up
-
+	glDisable(GL_LIGHTING);
 
 	//Cameras set up
-	_cameras.push_back(std::make_shared<Orthocamera>());
+	_cameras.push_back(std::make_shared<Orthocamera>(ORTHO_SIZE));
 	_cameras.push_back(std::make_shared<Perspectivecamera> (1, PRESPCAM_POS + TABLE_SIZE));
 	_cameras.push_back(std::make_shared<Movperspectivecamera>(1, 300));
 	_currentCamera = CAMERA_PERSP;
+	changedCamera();
     GLdouble angleIncrement = ((2 * M_PI) / (2 * NUM_CHEERIOS));
     GLdouble lightIncrement =((2 * M_PI) / NUM_POINTLIGHTS);
     
@@ -314,7 +324,8 @@ GLvoid GameManager::init(){
     
     //car
     _car = Car();
-    
+	_carLives = Carlives();
+
     //outter cheerios
     for(float angle = 0; angle < 2 * M_PI - angleIncrement; angle = angle + angleIncrement){
         Cheerio cheerio = Cheerio(angle, ROAD_OUT_RADIUS);
@@ -354,19 +365,18 @@ GLvoid GameManager::init(){
     for(float angle = 0; angle < 2 * M_PI - lightIncrement; angle = angle + lightIncrement){
         Pointlight pointlight = Pointlight(RADIUS_POINTLIGHTS * cosf(angle), RADIUS_POINTLIGHTS * sinf(angle), 0);
         _pointlights.push_back(pointlight);
-        
         Lightsource lightsource = Lightsource(i);
         lightsource.setPosition(pointlight.getPositionX(), pointlight.getPositionY(), pointlight.getPositionZ()+20);
         _lightsources.push_back(lightsource);
         i++;
     }
+
+	//car lights
     lightsource = Lightsource(7);
-    lightsource.setPosition(_car.getPositionX(),_car.getPositionY(),_car.getPositionZ());
-    //GLfloat norm = _car.getSpeed().norm();
-    //lightsource.setDirection(_car.getSpeed().getX()/norm, _car.getSpeed().getY()/norm, _car.getSpeed().getZ()/norm);
-    _lightsources.push_back(lightsource);
-    //_lightsources.push_back(Lightsource(8));
-    
+	lightsource.update(_car);
+	lightsource.setCutOff(25);
+	lightsource.setExponent(0);
+	_lightsources.push_back(lightsource); 
 }
 
 GLvoid GameManager::levelUp(){

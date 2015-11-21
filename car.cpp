@@ -11,7 +11,7 @@ Car::Car(): DynamicObject() {
     _left = false;
     _previous_position  = Vector3();
     _hitboxRadius = 7.04;//7.04
-    _lives = LIVES;
+	_carFell = false;
     _lights_mat_emiss.set(0.5, 0.5, 0.5, 0);
     setPosition(95, -6.5, 0);//95,-6.5,0
 	setSpeed(0, 1, 0);
@@ -27,7 +27,7 @@ GLvoid Car::setKeyUp(GLboolean value){ _up = value; }
 GLvoid Car::setKeyDown(GLboolean value){ _down = value; }
 GLvoid Car::setKeyRight(GLboolean value){ _right = value; }
 GLvoid Car::setKeyLeft(GLboolean value){ _left = value; }
-GLint Car::getLives(){ return _lives; }
+
 GLvoid Car::crash(){
     setPosition(_previous_position.getX(), _previous_position.getY(), _previous_position.getZ());
     _vel = 0;
@@ -43,7 +43,6 @@ GLvoid Car::reset(){
     setPosition(95, -6.5, 0);//95,-6.5,0
     setSpeed(0, 1, 0);
     printf("lost a life\n");
-    _lives--;
 }
 
 GLvoid Car::draw(){
@@ -235,7 +234,7 @@ GLvoid Car::update(GLdouble delta_t){
     if ((fabs(getPositionX()) >(125. + _hitboxRadius*0.7 ) || fabs(getPositionY()) >(125. + _hitboxRadius*0.7 )) &&  getPositionZ()<-70) {
         felloff = false;
         printf("lost a life\n");
-        _lives--;
+		changeCarFell();
         setPosition(95.0, -6.5, 0.0); // Initial position
         setVel(0.0);
         setAngle(90.0);
@@ -294,6 +293,14 @@ GLvoid Car::drawWheel(GLfloat wheelWidth, GLfloat radius, GLfloat x, GLfloat y){
     }
     glEnd();
     glPopMatrix();
+}
+
+GLvoid Car::changeCarFell(){
+	_carFell = !_carFell;
+}
+
+GLboolean Car::getCarFell(){
+	return _carFell;
 }
 
 

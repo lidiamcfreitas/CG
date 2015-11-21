@@ -3,8 +3,10 @@
 #include "Camera.h"
 
 class Orthocamera: public Camera {
+private:
+	int _orthoSize;
 public:
-	Orthocamera();
+	Orthocamera(int size);
 	~Orthocamera();
 	GLvoid computeProjectionMatrix();
 };
