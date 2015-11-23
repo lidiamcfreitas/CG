@@ -10,7 +10,7 @@ Car::Car(): DynamicObject() {
     _right = false;
     _left = false;
     _previous_position  = Vector3();
-    _hitboxRadius = 7.04;//7.04
+    _hitboxRadius = 4;//7.04
 	_carFell = false;
     _lights_mat_emiss.set(0.5, 0.5, 0.5, 0);
     setPosition(95, -6.5, 0);//95,-6.5,0

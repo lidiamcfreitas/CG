@@ -375,7 +375,7 @@ GLvoid GameManager::init(){
     lightsource = Lightsource(7);
 	lightsource.update(_car);
 	lightsource.setCutOff(25);
-	lightsource.setExponent(0);
+	lightsource.setExponent(20);
 	_lightsources.push_back(lightsource); 
 }
 

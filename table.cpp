@@ -38,6 +38,19 @@ GLvoid Table::draw(){
     glutSolidCube(TABLE_SIZE);
     glPopMatrix();
     
+    glPushMatrix();
+    
+    for(GLfloat xcoord = - TABLE_SIZE/2; xcoord < TABLE_SIZE/2; xcoord += TABLE_SIZE/250){
+        glBegin (GL_QUAD_STRIP);
+        for(GLfloat ycoord = - TABLE_SIZE/2; ycoord <= TABLE_SIZE/2; ycoord += TABLE_SIZE/250){
+            glNormal3f(0, 0, 1);
+            glVertex3f(xcoord,ycoord , 0.1);
+            glVertex3f(xcoord + TABLE_SIZE/250, ycoord, 0.1);
+        }
+        glEnd();
+    }
+    
+    glPopMatrix();
     //inner table circle
 	/*comentei esta parte porque por alguma razao isto metia as luzes do carro completamente 
 	estupidas n consegui entender porque acho que tem a haver com as normais*/

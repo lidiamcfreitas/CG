@@ -36,12 +36,15 @@ GLvoid Lightsource::draw(){
     glLightfv(GL_LIGHT0 + _id, GL_SPOT_DIRECTION, direction);
     glLightf(GL_LIGHT0 + _id, GL_SPOT_CUTOFF, _cut_off);
     glLightf(GL_LIGHT0 + _id, GL_SPOT_EXPONENT, _exponent);
+    if (_id==7) {
+        glLightf(GL_LIGHT0 + _id, GL_QUADRATIC_ATTENUATION, 0.0003);
+    }
 }
 
 GLvoid Lightsource::update(Car car){
 	Vector3 direction = Vector3(cos(car.getAngle()*M_PI / 180), sin(car.getAngle()*M_PI / 180), 0);
 	_direction.set(direction.getX() / direction.norm(), direction.getY() / direction.norm(), 0);
-	setPosition(_direction.getX()*3 + car.getPositionX(),_direction.getY()*3 + car.getPositionY(), .5);
+	setPosition(_direction.getX()*3 + car.getPositionX(),_direction.getY()*3 + car.getPositionY(), .5 + car.getPositionZ());
 }
 
 GLvoid Lightsource::setDirection(GLdouble x, GLdouble y, GLdouble z){
