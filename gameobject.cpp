@@ -43,3 +43,4 @@ GLvoid GameObject::material(GLfloat amb[], GLfloat diff[], GLfloat spec[], GLflo
     GLfloat emiss[] = {0.0, 0.0, 0.0, 1.0};
     glMaterialfv(GL_FRONT, GL_EMISSION, emiss);
 }
+
