@@ -30,16 +30,17 @@ GLvoid Table::draw(){
     glPopMatrix();
     
    //table
-    glColor3f(0.6, 0.6, 0.6); // glColor3f(0.7, 0.7, 0.7);
-    glPushMatrix();
+	glColor3f(0.6, 0.6, 0.6); // glColor3f(0.7, 0.7, 0.7);
+ /*   glPushMatrix();
     material(amb, diff, spec, shine);
     glTranslatef( 0.0f, 0.0f, -20.);
     glScalef(1, 1, 40./TABLE_SIZE);
     glutSolidCube(TABLE_SIZE);
-    glPopMatrix();
+    glPopMatrix();*/
     
     glPushMatrix();
-    
+	glEnable(GL_TEXTURE_2D);
+	material(amb, diff, spec, shine);
     for(GLfloat xcoord = - TABLE_SIZE/2; xcoord < TABLE_SIZE/2; xcoord += TABLE_SIZE/TABLE_FINESSE){
         glBegin (GL_QUAD_STRIP);
         for(GLfloat ycoord = - TABLE_SIZE/2; ycoord <= TABLE_SIZE/2; ycoord += 2 * TABLE_SIZE/TABLE_FINESSE){
@@ -60,7 +61,7 @@ GLvoid Table::draw(){
         }
         glEnd();
     }
-    
+	glDisable(GL_TEXTURE_2D);
     glPopMatrix();
     //inner table circle
 	/*comentei esta parte porque por alguma razao isto metia as luzes do carro completamente 

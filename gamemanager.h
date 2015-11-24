@@ -16,6 +16,7 @@
 #include "perspectivecamera.h"
 #include "movperspectivecamera.h"
 #include "carlives.h"
+#include "texture.h"
 
 
 class GameManager{
@@ -32,6 +33,7 @@ private:
     std::vector<Lightsource> _lightsources;
     
 	std::vector<std::shared_ptr<Camera>> _cameras;
+	std::vector<Texture> _texture;
 	int _currentCamera;
     
     GLboolean   _solidOrWire;
@@ -67,5 +69,9 @@ public:
     GLvoid wakeupOrange(GLint _id);
     GLvoid levelUp();
 	GLvoid lightCalculationChanged();
+	GLvoid setPauseTexture();
+	GLvoid setNormalTexture();
+	GLvoid setRestartTexture();
+	GLvoid setCamera(GLint cameraNumber);
 
 };

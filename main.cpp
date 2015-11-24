@@ -49,9 +49,14 @@ GLvoid GameControl(unsigned char key, int x, int y){
 	case 'r':
 		gamemanager = GameManager();
 		gamemanager.init();
+		paused = false;
 		break;
 	case 's':
 		paused = !paused;
+		if (paused)
+			gamemanager.setPauseTexture();
+		else
+			gamemanager.setNormalTexture();
 		break;
 	}
 	if (!paused){
@@ -78,8 +83,11 @@ GLvoid timer(int value)
     if (!paused) {
         gamemanager.update(diff);
         if (gamemanager.itsOver()){
-            gamemanager = GameManager();
-            gamemanager.init();
+			gamemanager.setCamera(0);
+			gamemanager.changedCamera();
+			paused = true;
+			gamemanager.setRestartTexture();
+			
         }
     }
     
