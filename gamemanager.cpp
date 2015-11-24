@@ -377,6 +377,18 @@ GLvoid GameManager::init(){
 	lightsource.setCutOff(25);
 	lightsource.setExponent(20);
 	_lightsources.push_back(lightsource); 
+
+	//textures
+	Texture texture = Texture();
+	texture.loadTexture("ground.png");
+	_texture.push_back(texture);
+	texture = Texture();
+	texture.loadTexture("pausa.png");
+	_texture.push_back(texture);
+	texture = Texture();
+	texture.loadTexture("gameover.png");
+	_texture.push_back(texture);
+	setNormalTexture();
 }
 
 GLvoid GameManager::levelUp(){
@@ -388,4 +400,20 @@ GLvoid GameManager::levelUp(){
 
 GLvoid GameManager::wakeupOrange(int _id){
     _oranges[_id].wakeupOrange();
+}
+
+GLvoid GameManager::setPauseTexture(){
+	glBindTexture(GL_TEXTURE_2D, _texture[1].getTexture());
+}
+
+GLvoid GameManager::setNormalTexture(){
+	glBindTexture(GL_TEXTURE_2D, _texture[0].getTexture());
+}
+
+GLvoid GameManager::setRestartTexture(){
+	glBindTexture(GL_TEXTURE_2D, _texture[2].getTexture());
+}
+
+GLvoid GameManager::setCamera(GLint cameraNumber){
+	_currentCamera = cameraNumber;
 }
