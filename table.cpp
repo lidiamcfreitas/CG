@@ -42,23 +42,21 @@ GLvoid Table::draw(){
     
     for(GLfloat xcoord = - TABLE_SIZE/2; xcoord < TABLE_SIZE/2; xcoord += TABLE_SIZE/TABLE_FINESSE){
         glBegin (GL_QUAD_STRIP);
-        for(GLfloat ycoord = - TABLE_SIZE/2; ycoord <= TABLE_SIZE/2; ycoord += TABLE_SIZE/TABLE_FINESSE){
-            
-            if(xcoord == -TABLE_SIZE/2 && ycoord == -TABLE_SIZE/2){
-                glTexCoord2f(0, 0);
-            }
-            else if(xcoord == -TABLE_SIZE/2 && ycoord == TABLE_SIZE/2){
-                glTexCoord2f(0, 1);
-            }
+        for(GLfloat ycoord = - TABLE_SIZE/2; ycoord <= TABLE_SIZE/2; ycoord += 2 * TABLE_SIZE/TABLE_FINESSE){
+
             glNormal3f(0, 0, 1);
-            glVertex3f(xcoord,ycoord , 0.1);
-            if(xcoord == TABLE_SIZE/2 && ycoord == TABLE_SIZE/2 ){
-                glTexCoord2f(1, 1);
-            }
-            else if (xcoord == TABLE_SIZE/2 && ycoord == -TABLE_SIZE/2){
-                glTexCoord2f(1, 0);
-            }
-            glVertex3f(xcoord + TABLE_SIZE/250, ycoord, 0.1);
+            
+            glTexCoord2f( (xcoord + TABLE_SIZE/2) / TABLE_SIZE, (ycoord + TABLE_SIZE/2) / TABLE_SIZE);
+            glVertex3f(xcoord,ycoord , 0.1);                                                      //canto inferior esquerdo
+            
+            glTexCoord2f( ( (xcoord + TABLE_SIZE/TABLE_FINESSE) + TABLE_SIZE/2) / TABLE_SIZE, (ycoord + TABLE_SIZE/2) / TABLE_SIZE);
+            glVertex3f(xcoord + TABLE_SIZE/TABLE_FINESSE, ycoord, 0.1);                           //canto inferior direito
+            
+            glTexCoord2f( (xcoord + TABLE_SIZE/2) / TABLE_SIZE, ( (ycoord + TABLE_SIZE/TABLE_FINESSE) + TABLE_SIZE/2) / TABLE_SIZE);
+            glVertex3f(xcoord, ycoord + TABLE_SIZE/TABLE_FINESSE, 0.1);                           //canto superior esquerdo
+            
+            glTexCoord2f( ((xcoord + TABLE_SIZE/TABLE_FINESSE) + TABLE_SIZE/2) / TABLE_SIZE, ((ycoord + TABLE_SIZE/TABLE_FINESSE) + TABLE_SIZE/2) / TABLE_SIZE);
+            glVertex3f(xcoord + TABLE_SIZE/TABLE_FINESSE, ycoord + TABLE_SIZE/TABLE_FINESSE, 0.1);//canto superior direito
         }
         glEnd();
     }
