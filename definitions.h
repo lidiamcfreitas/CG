@@ -30,12 +30,13 @@
 #define ROAD_WIDTH              40
 #define TABLE_SIZE              250
 #define LIVES                   5
+#define TABLE_FINESSE           250
 
 // CAR
 #define CAR_VEL_MAX             110
 #define CAR_VEL_MIN             -40
 #define CAR_VEL_STEP            10
-#define CAR_ANGLE_STEP          180
+#define CAR_ANGLE_STEP          130
 #define CAR_ACCEL               50
 
 // ORANGES

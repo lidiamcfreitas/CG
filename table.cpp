@@ -40,11 +40,24 @@ GLvoid Table::draw(){
     
     glPushMatrix();
     
-    for(GLfloat xcoord = - TABLE_SIZE/2; xcoord < TABLE_SIZE/2; xcoord += TABLE_SIZE/250){
+    for(GLfloat xcoord = - TABLE_SIZE/2; xcoord < TABLE_SIZE/2; xcoord += TABLE_SIZE/TABLE_FINESSE){
         glBegin (GL_QUAD_STRIP);
-        for(GLfloat ycoord = - TABLE_SIZE/2; ycoord <= TABLE_SIZE/2; ycoord += TABLE_SIZE/250){
+        for(GLfloat ycoord = - TABLE_SIZE/2; ycoord <= TABLE_SIZE/2; ycoord += TABLE_SIZE/TABLE_FINESSE){
+            
+            if(xcoord == -TABLE_SIZE/2 && ycoord == -TABLE_SIZE/2){
+                glTexCoord2f(0, 0);
+            }
+            else if(xcoord == -TABLE_SIZE/2 && ycoord == TABLE_SIZE/2){
+                glTexCoord2f(0, 1);
+            }
             glNormal3f(0, 0, 1);
             glVertex3f(xcoord,ycoord , 0.1);
+            if(xcoord == TABLE_SIZE/2 && ycoord == TABLE_SIZE/2 ){
+                glTexCoord2f(1, 1);
+            }
+            else if (xcoord == TABLE_SIZE/2 && ycoord == -TABLE_SIZE/2){
+                glTexCoord2f(1, 0);
+            }
             glVertex3f(xcoord + TABLE_SIZE/250, ycoord, 0.1);
         }
         glEnd();
