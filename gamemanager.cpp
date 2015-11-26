@@ -196,6 +196,8 @@ GLvoid GameManager::changedCamera(){
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	_cameras[_currentCamera]->computeProjectionMatrix();
+	if (_currentCamera == 0)
+		rotate_x = 0;
 }
 
 GLvoid GameManager::update(GLdouble delta_t){

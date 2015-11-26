@@ -31,13 +31,14 @@ GLvoid Table::draw(){
     
    //table
 	glColor3f(0.6, 0.6, 0.6); // glColor3f(0.7, 0.7, 0.7);
- /*   glPushMatrix();
+    glPushMatrix();
     material(amb, diff, spec, shine);
     glTranslatef( 0.0f, 0.0f, -20.);
     glScalef(1, 1, 40./TABLE_SIZE);
     glutSolidCube(TABLE_SIZE);
-    glPopMatrix();*/
-    
+    glPopMatrix();
+	
+	glColor3f(1, 1, 1);
     glPushMatrix();
 	glEnable(GL_TEXTURE_2D);
 	material(amb, diff, spec, shine);
